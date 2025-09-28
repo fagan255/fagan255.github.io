@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Keranjang - Thrifting</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <style>
+      body {
+        background-color: #f8f9fa;
+        font-family: "Arial", sans-serif;
+      }
+      .navbar {
+        background-color: #343a40;
+      }
+      .cart-title {
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: #343a40;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+      .cart-item {
+        border: 1px solid #e0e0e0;
+        border-radius: 10px;
+        padding: 15px;
+        margin-bottom: 20px;
+        background-color: white;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+      .cart-item img {
+        max-width: 100px;
+        margin-right: 15px;
+        border-radius: 10px;
+      }
+      .cart-description {
+        font-size: 1.2rem;
+        color: #343a40;
+      }
+      .cart-price {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #28a745;
+      }
+      .btn-primary {
+        background-color: #007bff;
+        border: none;
+      }
+      .btn-primary:hover {
+        background-color: #0056b3;
+      }
+      footer {
+        background-color: #343a40;
+        color: white;
+        padding: 10px 0;
+        margin-top: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+      <a class="navbar-brand" href="#">Batik</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Beranda</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="produk.html">Galeri</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="keranjang.html">Makna Motif</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="kontak.html">Kontak</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Keranjang -->
+    <div class="container my-5">
+      <h1 class="cart-title">Makna Motif</h1>
+      <div class="cart-item d-flex align-items-center">
+        <img src="https://images.tokopedia.net/img/cache/900/VqbcmM/2023/3/7/69d73ea0-ea82-492c-913a-a797a5ded431.jpg" alt="T Shirt The North Face" />
+        <div>
+          <h5 class="cart-description"><b>Motif Barong</b></h5>
+          <h5 class="cart-description">
+            Barong merupakan hewan mitos yang memiliki kekuatan supernatural. Hewan ini merupakan gabungan dari macan atau singa (badan, kaki, dan matanya), elang, gajah, dan naga (mulut menyeringai dengan lidah panjang). Hewan ini
+            seringkali ditemukan dalam karya seni Jawa dan Bali sebagai perlambang kekuatan, kebenaran, dan kejantanan. Barong juga merupakan lambang falsafah bahwa manusia memiliki dua sisi. Kita harus mengendalikan hasrat buruk dan
+            menahan diri dari godaan agar dapat berkembang sempurna sebagai manusia yang dewasa dan bijak.
+          </h5>
+        </div>
+      </div>
+
+      <div class="text-right">
+        <a href="checkout.html" class="btn btn-primary btn-lg mt-3">Selanjutnya</a>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center">
+      <p>&copy; Telp: (0341) 478195 | Lokasi: SMKN 5 Malang</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>
