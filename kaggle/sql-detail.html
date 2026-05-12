@@ -1,0 +1,1137 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Intro To SQL - Detail Materi</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="navbar">
+      <div class="container">
+        <div class="logo">
+          <h1>📊 Kaggle Learn</h1>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="breadcrumb"><a href="index.html">Beranda</a> / <a href="sql.html">Intro To SQL</a> / <span id="lesson-title">Detail Materi</span></div>
+
+      <div id="content" class="content-wrapper">
+        <!-- Content akan diisi oleh JavaScript -->
+      </div>
+
+      <div class="navigation">
+        <button class="nav-btn" id="prev-btn" onclick="previousLesson()">← Materi Sebelumnya</button>
+        <a href="sql.html" class="nav-btn">Kembali ke Daftar Materi</a>
+        <button class="nav-btn" id="next-btn" onclick="nextLesson()">Materi Selanjutnya →</button>
+      </div>
+    </div>
+
+    <footer>
+      <p>&copy; 2024 Kaggle Learn Platform. Sumber: www.kaggle.com/learn</p>
+    </footer>
+
+    <script>
+      // Data materi SQL
+      const sqlMaterials = [
+        {
+          id: 1,
+          title: "Getting Started With SQL and BigQuery",
+          titleId: "Memulai dengan SQL dan BigQuery",
+          content: `
+                    <div class="content-header">
+                        <h2>🗄️ Memulai dengan SQL dan BigQuery</h2>
+                        <p>Pelajari dasar-dasar SQL dan platform BigQuery untuk query data dari database.</p>
+                    </div>
+
+                    <div class="content-body">
+                        <h3>Apa itu SQL?</h3>
+                        <p>SQL (Structured Query Language) adalah bahasa pemrograman yang digunakan untuk berkomunikasi dengan database. SQL memungkinkan Anda untuk mengambil, memasukkan, memperbarui, dan menghapus data dari database.</p>
+
+                        <h3>Apa itu BigQuery?</h3>
+                        <p>BigQuery adalah layanan analisis data berbasis cloud dari Google. BigQuery dapat memproses data dalam jumlah besar dengan cepat. BigQuery menyediakan web UI untuk menulis dan menjalankan query SQL.</p>
+
+                        <h3>Database dan Tabel</h3>
+                        <p>Database adalah koleksi data yang terorganisir. Database terdiri dari tabel-tabel. Tabel adalah struktur data yang memiliki baris (rows) dan kolom (columns).</p>
+
+                        <div class="code-block">
+Contoh Tabel: Siswa
+
+| ID | Nama    | Umur | Kota     |
+|----|---------|------|----------|
+| 1  | Joni    | 20   | Jakarta  |
+| 2  | Budi    | 21   | Bandung  |
+| 3  | Siti    | 19   | Surabaya |
+| 4  | Ahmad   | 20   | Medan    |
+
+- Baris: setiap entri data (contoh: Joni, 20, Jakarta)
+- Kolom: kategori data (contoh: Nama, Umur, Kota)
+                        </div>
+
+                        <h3>Query SQL Pertama Anda</h3>
+                        <p>Query SQL dasar memiliki struktur berikut:</p>
+                        <div class="code-block">
+SELECT kolom
+FROM tabel
+                        </div>
+
+                        <p>Contoh query sederhana:</p>
+                        <div class="code-block">
+SELECT nama, umur
+FROM siswa
+                        </div>
+
+                        <p>Query di atas akan menampilkan kolom nama dan umur dari tabel siswa:</p>
+                        <div class="code-block">
+| Nama    | Umur |
+|---------|------|
+| Joni    | 20   |
+| Budi    | 21   |
+| Siti    | 19   |
+| Ahmad   | 20   |
+                        </div>
+
+                        <h4>SELECT *</h4>
+                        <p>Asterisk (*) berarti "semua kolom":</p>
+                        <div class="code-block">
+SELECT *
+FROM siswa
+                        </div>
+
+                        <h3>Konsep Penting</h3>
+                        <p><strong>BigQuery memproses data dengan jumlah besar</strong>. BigQuery dirancang untuk query data yang sangat besar (terabytes atau petabytes) dengan cepat.</p>
+
+                        <p><strong>Dataset di BigQuery</strong>. Data di BigQuery diorganisir dalam dataset. Setiap dataset dapat berisi banyak tabel. Contoh: <code>bigquery-public-data.baseball.schedules_post_wide</code></p>
+
+                        <h3>Menggunakan BigQuery</h3>
+                        <p>Untuk menggunakan BigQuery:</p>
+                        <ol>
+                            <li>Buka console.cloud.google.com</li>
+                            <li>Buat project baru atau gunakan existing project</li>
+                            <li>Navigasi ke BigQuery console</li>
+                            <li>Tulis query di SQL editor</li>
+                            <li>Klik "Run" untuk menjalankan query</li>
+                        </ol>
+
+                        <h3>Error Handling</h3>
+                        <p>Ketika Anda menulis query yang salah, BigQuery akan menampilkan pesan error. Pelajari membaca error message untuk memperbaiki query Anda.</p>
+
+                        <div class="code-block">
+# Ini akan menghasilkan error (kolom tidak ada)
+SELECT nama_tidak_ada
+FROM siswa
+
+# Error message:
+# Field 'nama_tidak_ada' not found in table 'siswa'
+                        </div>
+
+                        <h3>Ringkasan</h3>
+                        <p>Pada pelajaran ini, Anda telah mempelajari:</p>
+                        <ul>
+                            <li>✓ Apa itu SQL dan mengapa penting</li>
+                            <li>✓ Apa itu BigQuery dan cara menggunakannya</li>
+                            <li>✓ Konsep database dan tabel</li>
+                            <li>✓ Query SQL dasar dengan SELECT dan FROM</li>
+                            <li>✓ Cara menjalankan query di BigQuery</li>
+                            <li>✓ Cara membaca error message</li>
+                        </ul>
+                    </div>
+                `,
+        },
+        {
+          id: 2,
+          title: "Select, From & Where",
+          titleId: "Select, From, dan Where",
+          content: `
+                    <div class="content-header">
+                        <h2>🔍 Select, From, dan Where</h2>
+                        <p>Pelajari fundamentals query: SELECT, FROM, dan WHERE untuk mengambil data yang spesifik.</p>
+                    </div>
+
+                    <div class="content-body">
+                        <h3>SELECT - Memilih Kolom</h3>
+                        <p>SELECT digunakan untuk menentukan kolom mana yang ingin Anda tampilkan:</p>
+
+                        <div class="code-block">
+SELECT nama
+FROM siswa
+
+SELECT nama, umur
+FROM siswa
+
+SELECT nama, umur, kota
+FROM siswa
+
+SELECT *
+FROM siswa  -- Menampilkan semua kolom
+                        </div>
+
+                        <h3>FROM - Mengidentifikasi Tabel</h3>
+                        <p>FROM digunakan untuk menentukan tabel mana yang akan Anda query:</p>
+
+                        <div class="code-block">
+SELECT nama
+FROM siswa
+
+SELECT judul, rating
+FROM film
+
+SELECT pelanggan_id, total_pembelian
+FROM pesanan
+                        </div>
+
+                        <h3>WHERE - Filter Data</h3>
+                        <p>WHERE digunakan untuk memfilter data berdasarkan kondisi tertentu. Query akan hanya menampilkan baris yang memenuhi kondisi di WHERE:</p>
+
+                        <div class="code-block">
+SELECT *
+FROM siswa
+WHERE umur > 20
+
+-- Output:
+-- | ID | Nama | Umur | Kota    |
+-- |----|------|------|---------|
+-- | 2  | Budi | 21   | Bandung |
+                        </div>
+
+                        <h4>Operator Perbandingan dalam WHERE</h4>
+                        <p>Anda dapat menggunakan berbagai operator untuk membuat kondisi:</p>
+
+                        <div class="code-block">
+-- Sama dengan
+SELECT *
+FROM siswa
+WHERE kota = 'Jakarta'
+
+-- Tidak sama dengan
+SELECT *
+FROM siswa
+WHERE kota != 'Jakarta'
+-- atau
+SELECT *
+FROM siswa
+WHERE kota <> 'Jakarta'
+
+-- Lebih dari
+SELECT *
+FROM siswa
+WHERE umur > 20
+
+-- Kurang dari
+SELECT *
+FROM siswa
+WHERE umur < 20
+
+-- Lebih dari atau sama dengan
+SELECT *
+FROM siswa
+WHERE umur >= 20
+
+-- Kurang dari atau sama dengan
+SELECT *
+FROM siswa
+WHERE umur <= 20
+                        </div>
+
+                        <h4>String Matching dalam WHERE</h4>
+                        <p>Untuk text/string, gunakan tanda kutip:</p>
+
+                        <div class="code-block">
+SELECT *
+FROM siswa
+WHERE nama = 'Joni'
+
+SELECT *
+FROM siswa
+WHERE kota = 'Jakarta'
+
+-- Cek apakah string dimulai dengan karakter tertentu
+SELECT *
+FROM siswa
+WHERE nama LIKE 'J%'  -- Nama dimulai dengan 'J'
+
+-- Cek apakah string mengandung karakter
+SELECT *
+FROM siswa
+WHERE nama LIKE '%i'  -- Nama diakhiri dengan 'i'
+                        </div>
+
+                        <h4>Kondisi Multiple dengan AND/OR</h4>
+                        <p>Anda dapat menggabungkan beberapa kondisi:</p>
+
+                        <div class="code-block">
+-- AND - semua kondisi harus terpenuhi
+SELECT *
+FROM siswa
+WHERE umur > 19 AND kota = 'Jakarta'
+
+-- OR - minimal salah satu kondisi harus terpenuhi
+SELECT *
+FROM siswa
+WHERE kota = 'Jakarta' OR kota = 'Bandung'
+
+-- Kombinasi AND dan OR
+SELECT *
+FROM siswa
+WHERE (kota = 'Jakarta' OR kota = 'Bandung')
+  AND umur > 20
+                        </div>
+
+                        <h4>NOT dalam WHERE</h4>
+                        <p>Gunakan NOT untuk meniadakan kondisi:</p>
+
+                        <div class="code-block">
+SELECT *
+FROM siswa
+WHERE NOT kota = 'Jakarta'
+
+-- Equivalent dengan:
+SELECT *
+FROM siswa
+WHERE kota != 'Jakarta'
+                        </div>
+
+                        <h4>IN dalam WHERE</h4>
+                        <p>IN memungkinkan Anda untuk memilih dari beberapa nilai:</p>
+
+                        <div class="code-block">
+SELECT *
+FROM siswa
+WHERE kota IN ('Jakarta', 'Bandung', 'Surabaya')
+
+-- Equivalent dengan:
+SELECT *
+FROM siswa
+WHERE kota = 'Jakarta' OR kota = 'Bandung' OR kota = 'Surabaya'
+                        </div>
+
+                        <h3>BETWEEN dalam WHERE</h3>
+                        <p>BETWEEN memilih data dalam rentang tertentu:</p>
+
+                        <div class="code-block">
+SELECT *
+FROM siswa
+WHERE umur BETWEEN 19 AND 21
+
+-- Equivalent dengan:
+SELECT *
+FROM siswa
+WHERE umur >= 19 AND umur <= 21
+                        </div>
+
+                        <h3>NULL dalam WHERE</h3>
+                        <p>NULL mewakili nilai yang tidak ada atau tidak diketahui. Gunakan IS NULL atau IS NOT NULL:</p>
+
+                        <div class="code-block">
+-- Cari data dengan nilai NULL
+SELECT *
+FROM siswa
+WHERE email IS NULL
+
+-- Cari data dengan nilai bukan NULL
+SELECT *
+FROM siswa
+WHERE email IS NOT NULL
+                        </div>
+
+                        <h3>Case Sensitivity</h3>
+                        <p>Di SQL, perbandingan string umumnya tidak case-sensitive:</p>
+
+                        <div class="code-block">
+SELECT *
+FROM siswa
+WHERE nama = 'joni'  -- Akan cocok dengan 'Joni', 'JONI', 'joni', dll
+                        </div>
+
+                        <h3>Ringkasan</h3>
+                        <p>Pada pelajaran ini, Anda telah mempelajari:</p>
+                        <ul>
+                            <li>✓ Menggunakan SELECT untuk memilih kolom</li>
+                            <li>✓ Menggunakan FROM untuk menentukan tabel</li>
+                            <li>✓ Menggunakan WHERE untuk filter data</li>
+                            <li>✓ Operator perbandingan (=, !=, >, <, >=, <=)</li>
+                            <li>✓ Kondisi multiple dengan AND/OR/NOT</li>
+                            <li>✓ LIKE untuk string matching</li>
+                            <li>✓ IN untuk memilih dari beberapa nilai</li>
+                            <li>✓ BETWEEN untuk rentang nilai</li>
+                            <li>✓ IS NULL untuk cek nilai NULL</li>
+                        </ul>
+                    </div>
+                `,
+        },
+        {
+          id: 3,
+          title: "Group By, Having & Count",
+          titleId: "Group By, Having, dan Count",
+          content: `
+                    <div class="content-header">
+                        <h2>📊 Group By, Having, dan Count</h2>
+                        <p>Pelajari cara mengelompokkan data dan melakukan agregasi untuk analisis.</p>
+                    </div>
+
+                    <div class="content-body">
+                        <h3>Fungsi Agregat</h3>
+                        <p>Fungsi agregat melakukan perhitungan pada serangkaian nilai dan mengembalikan satu hasil:</p>
+
+                        <div class="code-block">
+-- COUNT - menghitung jumlah baris
+SELECT COUNT(*)
+FROM siswa
+-- Output: 4
+
+SELECT COUNT(id)
+FROM siswa
+-- Output: 4 (menghitung baris dengan id tidak null)
+
+-- SUM - menjumlahkan nilai
+SELECT SUM(umur)
+FROM siswa
+-- Output: 80 (20 + 21 + 19 + 20)
+
+-- AVG - menghitung rata-rata
+SELECT AVG(umur)
+FROM siswa
+-- Output: 20 (80 / 4)
+
+-- MAX - nilai maksimum
+SELECT MAX(umur)
+FROM siswa
+-- Output: 21
+
+-- MIN - nilai minimum
+SELECT MIN(umur)
+FROM siswa
+-- Output: 19
+                        </div>
+
+                        <h3>GROUP BY - Mengelompokkan Data</h3>
+                        <p>GROUP BY mengelompokkan baris dengan nilai yang sama dalam kolom tertentu:</p>
+
+                        <div class="code-block">
+-- Contoh tabel:
+-- | Nama  | Kota    | Umur |
+-- |-------|---------|------|
+-- | Joni  | Jakarta | 20   |
+-- | Budi  | Bandung | 21   |
+-- | Siti  | Jakarta | 19   |
+-- | Ahmad | Bandung | 20   |
+
+-- Kelompokkan berdasarkan kota dan hitung jumlah siswa di setiap kota
+SELECT kota, COUNT(*) as jumlah
+FROM siswa
+GROUP BY kota
+
+-- Output:
+-- | Kota    | Jumlah |
+-- |---------|--------|
+-- | Jakarta | 2      |
+-- | Bandung | 2      |
+                        </div>
+
+                        <h4>GROUP BY dengan Multiple Kolom</h4>
+                        <div class="code-block">
+SELECT kota, umur, COUNT(*) as jumlah
+FROM siswa
+GROUP BY kota, umur
+
+-- Output:
+-- | Kota    | Umur | Jumlah |
+-- |---------|------|--------|
+-- | Jakarta | 20   | 1      |
+-- | Jakarta | 19   | 1      |
+-- | Bandung | 21   | 1      |
+-- | Bandung | 20   | 1      |
+                        </div>
+
+                        <h4>GROUP BY dengan Agregat Multiple</h4>
+                        <div class="code-block">
+SELECT kota, 
+       COUNT(*) as jumlah,
+       AVG(umur) as rata_rata_umur,
+       MAX(umur) as umur_tertua,
+       MIN(umur) as umur_termuda
+FROM siswa
+GROUP BY kota
+
+-- Output:
+-- | Kota    | Jumlah | Rata_Rata_Umur | Umur_Tertua | Umur_Termuda |
+-- |---------|--------|----------------|-------------|--------------|
+-- | Jakarta | 2      | 19.5           | 20          | 19           |
+-- | Bandung | 2      | 20.5           | 21          | 20           |
+                        </div>
+
+                        <h3>HAVING - Filter Grup</h3>
+                        <p>WHERE memfilter baris sebelum GROUP BY, sementara HAVING memfilter hasil grup setelah GROUP BY:</p>
+
+                        <div class="code-block">
+-- Kelompokkan kota dan tampilkan hanya kota dengan lebih dari 1 siswa
+SELECT kota, COUNT(*) as jumlah
+FROM siswa
+GROUP BY kota
+HAVING COUNT(*) > 1
+
+-- Output:
+-- | Kota    | Jumlah |
+-- |---------|--------|
+-- | Jakarta | 2      |
+-- | Bandung | 2      |
+                        </div>
+
+                        <h4>Perbedaan WHERE dan HAVING</h4>
+                        <div class="code-block">
+-- WHERE - filter SEBELUM grouping
+SELECT kota, COUNT(*) as jumlah
+FROM siswa
+WHERE umur >= 20
+GROUP BY kota
+
+-- HAVING - filter SETELAH grouping
+SELECT kota, COUNT(*) as jumlah
+FROM siswa
+GROUP BY kota
+HAVING AVG(umur) >= 20
+
+-- KEDUANYA - filter sebelum dan sesudah grouping
+SELECT kota, COUNT(*) as jumlah
+FROM siswa
+WHERE umur >= 19
+GROUP BY kota
+HAVING COUNT(*) > 1
+                        </div>
+
+                        <h3>COUNT - Menghitung Data</h3>
+                        <p>COUNT adalah fungsi yang paling sering digunakan:</p>
+
+                        <div class="code-block">
+-- COUNT(*) - menghitung semua baris termasuk NULL
+SELECT COUNT(*) FROM siswa
+
+-- COUNT(kolom) - menghitung baris yang tidak NULL
+SELECT COUNT(email) FROM siswa  -- Jika ada NULL di kolom email
+
+-- COUNT(DISTINCT) - menghitung nilai unik
+SELECT COUNT(DISTINCT kota) FROM siswa
+-- Output: 2 (Jakarta dan Bandung)
+                        </div>
+
+                        <h3>Urutan Query</h3>
+                        <p>Urutan keyword SQL sangat penting:</p>
+
+                        <div class="code-block">
+SELECT   kolom1, COUNT(*) as jumlah
+FROM     tabel
+WHERE    kondisi_1
+GROUP BY kolom1
+HAVING   kondisi_2
+ORDER BY jumlah DESC
+                        </div>
+
+                        <h3>Ringkasan</h3>
+                        <p>Pada pelajaran ini, Anda telah mempelajari:</p>
+                        <ul>
+                            <li>✓ Fungsi agregat: COUNT, SUM, AVG, MAX, MIN</li>
+                            <li>✓ GROUP BY untuk mengelompokkan data</li>
+                            <li>✓ Agregat multiple dalam satu query</li>
+                            <li>✓ HAVING untuk filter hasil grup</li>
+                            <li>✓ Perbedaan WHERE dan HAVING</li>
+                            <li>✓ COUNT(*) vs COUNT(kolom) vs COUNT(DISTINCT)</li>
+                            <li>✓ Urutan keyword dalam query SQL</li>
+                        </ul>
+                    </div>
+                `,
+        },
+        {
+          id: 4,
+          title: "Order By",
+          titleId: "Order By - Pengurutan Data",
+          content: `
+                    <div class="content-header">
+                        <h2>⬆️ Order By - Pengurutan Data</h2>
+                        <p>Pelajari cara mengurutkan hasil query dengan ORDER BY.</p>
+                    </div>
+
+                    <div class="content-body">
+                        <h3>Apa itu ORDER BY?</h3>
+                        <p>ORDER BY digunakan untuk mengurutkan hasil query berdasarkan satu atau lebih kolom. Default sorting adalah ascending (dari kecil ke besar atau A ke Z).</p>
+
+                        <div class="code-block">
+-- Contoh tabel:
+-- | ID | Nama  | Umur | Kota     |
+-- |----|-------|------|----------|
+-- | 1  | Joni  | 20   | Jakarta  |
+-- | 2  | Budi  | 21   | Bandung  |
+-- | 3  | Siti  | 19   | Surabaya |
+-- | 4  | Ahmad | 20   | Medan    |
+
+-- Urutkan berdasarkan umur (ascending)
+SELECT *
+FROM siswa
+ORDER BY umur
+
+-- Output:
+-- | ID | Nama | Umur | Kota     |
+-- |----|------|------|----------|
+-- | 3  | Siti | 19   | Surabaya |
+-- | 1  | Joni | 20   | Jakarta  |
+-- | 4  | Ahmad| 20   | Medan    |
+-- | 2  | Budi | 21   | Bandung  |
+                        </div>
+
+                        <h3>ASC dan DESC</h3>
+                        <p><code>ASC</code> (ascending) adalah default, tetapi Anda dapat menentukan secara eksplisit. <code>DESC</code> (descending) mengurutkan dari besar ke kecil atau Z ke A:</p>
+
+                        <div class="code-block">
+-- Ascending (default)
+SELECT *
+FROM siswa
+ORDER BY umur ASC
+
+-- Descending
+SELECT *
+FROM siswa
+ORDER BY umur DESC
+
+-- Output DESC:
+-- | ID | Nama | Umur | Kota    |
+-- |----|------|------|---------|
+-- | 2  | Budi | 21   | Bandung |
+-- | 1  | Joni | 20   | Jakarta |
+-- | 4  | Ahmad| 20   | Medan   |
+-- | 3  | Siti | 19   | Surabaya|
+                        </div>
+
+                        <h3>ORDER BY Multiple Kolom</h3>
+                        <p>Anda dapat mengurutkan berdasarkan multiple kolom. Urutan sangat penting - query akan mengurutkan berdasarkan kolom pertama, kemudian kolom kedua untuk baris dengan nilai sama di kolom pertama:</p>
+
+                        <div class="code-block">
+-- Urutkan berdasarkan umur (ascending), kemudian berdasarkan nama (ascending)
+SELECT *
+FROM siswa
+ORDER BY umur, nama
+
+-- Output:
+-- | ID | Nama  | Umur | Kota     |
+-- |----|-------|------|----------|
+-- | 3  | Siti  | 19   | Surabaya |
+-- | 4  | Ahmad | 20   | Medan    |
+-- | 1  | Joni  | 20   | Jakarta  |
+-- | 2  | Budi  | 21   | Bandung  |
+
+-- Urutkan berdasarkan umur (descending), kemudian berdasarkan nama (ascending)
+SELECT *
+FROM siswa
+ORDER BY umur DESC, nama ASC
+                        </div>
+
+                        <h3>ORDER BY dengan WHERE</h3>
+                        <p>Anda dapat menggabungkan WHERE dan ORDER BY:</p>
+
+                        <div class="code-block">
+SELECT *
+FROM siswa
+WHERE kota = 'Jakarta' OR kota = 'Bandung'
+ORDER BY umur DESC
+
+-- Output:
+-- | ID | Nama | Umur | Kota    |
+-- |----|------|------|---------|
+-- | 2  | Budi | 21   | Bandung |
+-- | 1  | Joni | 20   | Jakarta |
+                        </div>
+
+                        <h3>ORDER BY dengan Agregat</h3>
+                        <p>Anda dapat menggunakan ORDER BY dengan GROUP BY dan fungsi agregat:</p>
+
+                        <div class="code-block">
+SELECT kota, COUNT(*) as jumlah
+FROM siswa
+GROUP BY kota
+ORDER BY jumlah DESC
+
+-- Output:
+-- | Kota    | Jumlah |
+-- |---------|--------|
+-- | Jakarta | 2      |
+-- | Bandung | 2      |
+-- | Medan   | 1      |
+-- | Surabaya| 1      |
+                        </div>
+
+                        <h3>ORDER BY dengan LIMIT (BONUS)</h3>
+                        <p>LIMIT membatasi jumlah hasil. Berguna untuk mendapatkan top-N hasil:</p>
+
+                        <div class="code-block">
+-- Top 3 siswa berdasarkan umur (dari tertua)
+SELECT *
+FROM siswa
+ORDER BY umur DESC
+LIMIT 3
+
+-- Output:
+-- | ID | Nama | Umur | Kota    |
+-- |----|------|------|---------|
+-- | 2  | Budi | 21   | Bandung |
+-- | 1  | Joni | 20   | Jakarta |
+-- | 4  | Ahmad| 20   | Medan   |
+                        </div>
+
+                        <h3>ORDER BY dengan Alias</h3>
+                        <p>Anda dapat menggunakan alias (nama singkat untuk kolom) dalam ORDER BY:</p>
+
+                        <div class="code-block">
+SELECT kota, COUNT(*) as jumlah_siswa
+FROM siswa
+GROUP BY kota
+ORDER BY jumlah_siswa DESC
+
+-- atau dengan alias
+SELECT kota, COUNT(*) as jumlah
+FROM siswa
+GROUP BY kota
+ORDER BY jumlah DESC
+                        </div>
+
+                        <h3>Urutan Keyword dalam Query</h3>
+                        <p>Penting untuk mengikuti urutan yang benar:</p>
+
+                        <div class="code-block">
+SELECT   kolom1, kolom2, COUNT(*) as jumlah
+FROM     tabel
+WHERE    kondisi
+GROUP BY kolom1, kolom2
+HAVING   kondisi_grup
+ORDER BY jumlah DESC
+LIMIT    10
+                        </div>
+
+                        <h3>Ringkasan</h3>
+                        <p>Pada pelajaran ini, Anda telah mempelajari:</p>
+                        <ul>
+                            <li>✓ Menggunakan ORDER BY untuk mengurutkan hasil</li>
+                            <li>✓ ASC (ascending) dan DESC (descending)</li>
+                            <li>✓ ORDER BY multiple kolom</li>
+                            <li>✓ Menggabungkan WHERE dan ORDER BY</li>
+                            <li>✓ ORDER BY dengan GROUP BY dan agregat</li>
+                            <li>✓ LIMIT untuk membatasi hasil</li>
+                            <li>✓ Urutan keyword dalam query SQL</li>
+                        </ul>
+                    </div>
+                `,
+        },
+        {
+          id: 5,
+          title: "As & With",
+          titleId: "As (Alias) dan With (CTE)",
+          content: `
+                    <div class="content-header">
+                        <h2>📋 As (Alias) dan With (CTE)</h2>
+                        <p>Pelajari cara menggunakan alias dan Common Table Expressions untuk query yang lebih jelas dan modular.</p>
+                    </div>
+
+                    <div class="content-body">
+                        <h3>AS - Alias untuk Kolom</h3>
+                        <p>AS digunakan untuk memberikan nama baru (alias) pada kolom atau tabel. Alias membuat query lebih mudah dibaca:</p>
+
+                        <div class="code-block">
+-- Tanpa alias
+SELECT COUNT(*) FROM siswa
+
+-- Dengan alias - lebih mudah dibaca
+SELECT COUNT(*) as total_siswa
+FROM siswa
+
+-- Alias untuk kolom
+SELECT nama as nama_siswa, umur as usia FROM siswa
+
+-- Alias dengan spasi (gunakan tanda kutip)
+SELECT nama AS "Nama Siswa"
+FROM siswa
+                        </div>
+
+                        <h4>Alias untuk Agregat</h4>
+                        <p>Alias sangat berguna dengan fungsi agregat:</p>
+                        <div class="code-block">
+SELECT 
+    kota,
+    COUNT(*) as jumlah_siswa,
+    AVG(umur) as rata_rata_umur,
+    MAX(umur) as umur_tertua
+FROM siswa
+GROUP BY kota
+ORDER BY jumlah_siswa DESC
+                        </div>
+
+                        <h3>AS - Alias untuk Tabel</h3>
+                        <p>Anda juga dapat memberikan alias pada tabel. Ini berguna ketika Anda melakukan join atau subquery:</p>
+
+                        <div class="code-block">
+-- Tanpa alias
+SELECT nama, umur
+FROM siswa
+WHERE umur > 20
+
+-- Dengan alias
+SELECT s.nama, s.umur
+FROM siswa s
+WHERE s.umur > 20
+
+-- Alias membuat query lebih ringkas ketika banyak kolom
+SELECT s.nama, s.umur, s.kota
+FROM siswa s
+WHERE s.kota = 'Jakarta'
+                        </div>
+
+                        <h3>WITH - Common Table Expression (CTE)</h3>
+                        <p>WITH memungkinkan Anda untuk membuat tabel sementara (temporary table) yang dapat digunakan dalam query. CTE membuat query yang kompleks lebih mudah dibaca:</p>
+
+                        <div class="code-block">
+-- Contoh CTE sederhana
+WITH siswa_dewasa AS (
+    SELECT *
+    FROM siswa
+    WHERE umur >= 20
+)
+SELECT nama, umur
+FROM siswa_dewasa
+
+-- Output adalah siswa yang umurnya >= 20
+                        </div>
+
+                        <h4>CTE dengan Agregat</h4>
+                        <div class="code-block">
+-- Hitung jumlah siswa per kota
+WITH siswa_per_kota AS (
+    SELECT kota, COUNT(*) as jumlah
+    FROM siswa
+    GROUP BY kota
+)
+SELECT kota, jumlah
+FROM siswa_per_kota
+WHERE jumlah > 1
+ORDER BY jumlah DESC
+                        </div>
+
+                        <h4>Multiple CTE</h4>
+                        <p>Anda dapat membuat multiple CTE dalam satu query:</p>
+                        <div class="code-block">
+WITH siswa_dewasa AS (
+    SELECT *
+    FROM siswa
+    WHERE umur >= 20
+),
+siswa_jakarta AS (
+    SELECT *
+    FROM siswa
+    WHERE kota = 'Jakarta'
+)
+SELECT s.nama, s.umur, s.kota
+FROM siswa_dewasa s
+WHERE s.kota IN (
+    SELECT kota FROM siswa_jakarta
+)
+                        </div>
+
+                        <h4>CTE dengan Subquery</h4>
+                        <p>CTE adalah alternatif yang lebih jelas untuk subquery:</p>
+                        <div class="code-block">
+-- Tanpa CTE (subquery)
+SELECT nama, umur
+FROM (
+    SELECT *
+    FROM siswa
+    WHERE umur >= 20
+) as siswa_muda
+
+-- Dengan CTE (lebih jelas)
+WITH siswa_muda AS (
+    SELECT *
+    FROM siswa
+    WHERE umur >= 20
+)
+SELECT nama, umur
+FROM siswa_muda
+                        </div>
+
+                        <h3>Kapan Menggunakan Alias dan CTE</h3>
+                        <p><strong>Gunakan Alias untuk:</strong></p>
+                        <ul>
+                            <li>Memberikan nama yang lebih deskriptif pada kolom</li>
+                            <li>Menyingkat nama tabel yang panjang</li>
+                            <li>Membuat output lebih mudah dibaca</li>
+                        </ul>
+
+                        <p><strong>Gunakan CTE untuk:</strong></p>
+                        <ul>
+                            <li>Query yang kompleks dan sulit dibaca</li>
+                            <li>Membuat logika query lebih modular</li>
+                            <li>Menggunakan hasil subquery multiple kali</li>
+                            <li>Meningkatkan readability query yang panjang</li>
+                        </ul>
+
+                        <h3>Contoh Kompleks</h3>
+                        <div class="code-block">
+WITH siswa_by_kota AS (
+    SELECT 
+        kota,
+        COUNT(*) as jumlah,
+        AVG(umur) as rata_rata_umur
+    FROM siswa
+    GROUP BY kota
+)
+SELECT 
+    kota,
+    jumlah as jumlah_siswa,
+    rata_rata_umur as usia_rata_rata
+FROM siswa_by_kota
+WHERE jumlah > 1
+ORDER BY rata_rata_umur DESC
+                        </div>
+
+                        <h3>Ringkasan</h3>
+                        <p>Pada pelajaran ini, Anda telah mempelajari:</p>
+                        <ul>
+                            <li>✓ AS untuk alias kolom</li>
+                            <li>✓ AS untuk alias tabel</li>
+                            <li>✓ WITH untuk membuat CTE</li>
+                            <li>✓ Multiple CTE dalam satu query</li>
+                            <li>✓ CTE sebagai alternatif subquery</li>
+                            <li>✓ Kapan menggunakan alias dan CTE</li>
+                            <li>✓ Query kompleks dengan alias dan CTE</li>
+                        </ul>
+                    </div>
+                `,
+        },
+        {
+          id: 6,
+          title: "Joins and Unions",
+          titleId: "Joins dan Unions",
+          content: `
+                    <div class="content-header">
+                        <h2>🔗 Joins dan Unions</h2>
+                        <p>Pelajari cara menggabungkan data dari multiple tabel dengan JOIN dan UNION.</p>
+                    </div>
+
+                    <div class="content-body">
+                        <h3>Apa itu JOIN?</h3>
+                        <p>JOIN menggabungkan baris dari dua atau lebih tabel berdasarkan kolom yang sama. Ini berguna untuk menghubungkan data yang tersebar di multiple tabel.</p>
+
+                        <h4>Contoh Tabel</h4>
+                        <div class="code-block">
+Tabel: Siswa
+| ID | Nama | Kelas_ID |
+|----|------|----------|
+| 1  | Joni | 10       |
+| 2  | Budi | 10       |
+| 3  | Siti | 11       |
+
+Tabel: Kelas
+| ID | Nama_Kelas | Guru    |
+|----|------------|---------|
+| 10 | X-A        | Pak Rudi|
+| 11 | X-B        | Bu Sinta|
+                        </div>
+
+                        <h3>INNER JOIN</h3>
+                        <p>INNER JOIN menampilkan baris yang memiliki kecocokan di kedua tabel:</p>
+
+                        <div class="code-block">
+SELECT s.nama as nama_siswa, k.nama_kelas, k.guru
+FROM siswa s
+INNER JOIN kelas k
+ON s.kelas_id = k.id
+
+-- Output:
+-- | Nama_Siswa | Nama_Kelas | Guru     |
+-- |------------|------------|----------|
+-- | Joni       | X-A        | Pak Rudi |
+-- | Budi       | X-A        | Pak Rudi |
+-- | Siti       | X-B        | Bu Sinta |
+                        </div>
+
+                        <h3>LEFT JOIN</h3>
+                        <p>LEFT JOIN menampilkan semua baris dari tabel kiri, dan baris yang cocok dari tabel kanan:</p>
+
+                        <div class="code-block">
+SELECT s.nama as nama_siswa, k.nama_kelas
+FROM siswa s
+LEFT JOIN kelas k
+ON s.kelas_id = k.id
+
+-- Jika ada siswa tanpa kelas, akan tetap ditampilkan dengan nilai NULL di kolom kelas
+                        </div>
+
+                        <h3>RIGHT JOIN</h3>
+                        <p>RIGHT JOIN adalah kebalikan dari LEFT JOIN - menampilkan semua baris dari tabel kanan:</p>
+
+                        <div class="code-block">
+SELECT s.nama as nama_siswa, k.nama_kelas
+FROM siswa s
+RIGHT JOIN kelas k
+ON s.kelas_id = k.id
+
+-- Jika ada kelas tanpa siswa, akan tetap ditampilkan dengan nilai NULL di nama_siswa
+                        </div>
+
+                        <h3>FULL OUTER JOIN</h3>
+                        <p>FULL OUTER JOIN menampilkan semua baris dari kedua tabel, baik cocok atau tidak:</p>
+
+                        <div class="code-block">
+SELECT s.nama as nama_siswa, k.nama_kelas
+FROM siswa s
+FULL OUTER JOIN kelas k
+ON s.kelas_id = k.id
+
+-- Note: Tidak semua database mendukung FULL OUTER JOIN
+                        </div>
+
+                        <h3>CROSS JOIN</h3>
+                        <p>CROSS JOIN menghasilkan semua kombinasi baris dari kedua tabel:</p>
+
+                        <div class="code-block">
+SELECT s.nama, k.nama_kelas
+FROM siswa s
+CROSS JOIN kelas k
+
+-- Hasilnya akan memiliki semua kombinasi siswa dengan kelas
+                        </div>
+
+                        <h3>Multiple JOINs</h3>
+                        <p>Anda dapat menggabungkan multiple tabel dalam satu query:</p>
+
+                        <div class="code-block">
+SELECT s.nama, k.nama_kelas, g.nama_guru
+FROM siswa s
+INNER JOIN kelas k ON s.kelas_id = k.id
+INNER JOIN guru g ON k.guru_id = g.id
+                        </div>
+
+                        <h3>UNION - Menggabungkan Query</h3>
+                        <p>UNION menggabungkan hasil dari multiple query. Kolom harus memiliki jumlah dan tipe yang sama:</p>
+
+                        <div class="code-block">
+SELECT nama FROM siswa
+UNION
+SELECT nama FROM guru
+
+-- Output: Daftar semua nama (siswa dan guru) tanpa duplikat
+                        </div>
+
+                        <h4>UNION vs UNION ALL</h4>
+                        <div class="code-block">
+-- UNION - menghilangkan duplikat
+SELECT nama FROM siswa
+UNION
+SELECT nama FROM guru
+
+-- UNION ALL - menyimpan duplikat
+SELECT nama FROM siswa
+UNION ALL
+SELECT nama FROM guru
+                        </div>
+
+                        <h3>JOIN vs UNION</h3>
+                        <p><strong>JOIN</strong> menggabungkan kolom dari multiple tabel (horizontal)</p>
+                        <p><strong>UNION</strong> menggabungkan baris dari multiple query (vertical)</p>
+
+                        <div class="code-block">
+-- JOIN - menggabungkan kolom
+SELECT s.nama, k.nama_kelas
+FROM siswa s
+JOIN kelas k ON s.kelas_id = k.id
+-- Hasil: nama siswa + nama kelas (horizontal)
+
+-- UNION - menggabungkan baris
+SELECT nama FROM siswa
+UNION
+SELECT nama_kelas FROM kelas
+-- Hasil: daftar nama dari siswa dan nama kelas (vertical)
+                        </div>
+
+                        <h3>JOIN dengan WHERE</h3>
+                        <div class="code-block">
+SELECT s.nama, k.nama_kelas
+FROM siswa s
+INNER JOIN kelas k ON s.kelas_id = k.id
+WHERE k.nama_kelas = 'X-A'
+                        </div>
+
+                        <h3>Ringkasan</h3>
+                        <p>Pada pelajaran ini, Anda telah mempelajari:</p>
+                        <ul>
+                            <li>✓ INNER JOIN - baris yang cocok di kedua tabel</li>
+                            <li>✓ LEFT JOIN - semua baris dari tabel kiri</li>
+                            <li>✓ RIGHT JOIN - semua baris dari tabel kanan</li>
+                            <li>✓ FULL OUTER JOIN - semua baris dari kedua tabel</li>
+                            <li>✓ CROSS JOIN - semua kombinasi baris</li>
+                            <li>✓ Multiple JOINs dalam satu query</li>
+                            <li>✓ UNION - menggabungkan hasil query</li>
+                            <li>✓ UNION vs UNION ALL</li>
+                            <li>✓ JOIN vs UNION</li>
+                        </ul>
+                    </div>
+                `,
+        },
+      ];
+
+      // Get lesson ID from URL
+      function getLessonId() {
+        const params = new URLSearchParams(window.location.search);
+        return parseInt(params.get("lesson")) || 1;
+      }
+
+      // Display content
+      function displayLesson(lessonId) {
+        const lesson = sqlMaterials.find((m) => m.id === lessonId);
+        if (lesson) {
+          document.getElementById("lesson-title").textContent = lesson.titleId;
+          document.getElementById("content").innerHTML = lesson.content;
+          updateNavigationButtons(lessonId);
+        }
+      }
+
+      // Update navigation buttons
+      function updateNavigationButtons(lessonId) {
+        const prevBtn = document.getElementById("prev-btn");
+        const nextBtn = document.getElementById("next-btn");
+
+        if (lessonId === 1) {
+          prevBtn.disabled = true;
+          prevBtn.style.opacity = "0.5";
+        } else {
+          prevBtn.disabled = false;
+          prevBtn.style.opacity = "1";
+        }
+
+        if (lessonId === sqlMaterials.length) {
+          nextBtn.disabled = true;
+          nextBtn.style.opacity = "0.5";
+        } else {
+          nextBtn.disabled = false;
+          nextBtn.style.opacity = "1";
+        }
+      }
+
+      // Navigation functions
+      function previousLesson() {
+        let currentId = getLessonId();
+        if (currentId > 1) {
+          window.location.search = "?lesson=" + (currentId - 1);
+        }
+      }
+
+      function nextLesson() {
+        let currentId = getLessonId();
+        if (currentId < sqlMaterials.length) {
+          window.location.search = "?lesson=" + (currentId + 1);
+        }
+      }
+
+      // Load lesson on page load
+      window.onload = function () {
+        displayLesson(getLessonId());
+      };
+    </script>
+  </body>
+</html>

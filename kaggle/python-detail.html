@@ -1,0 +1,951 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Python - Detail Materi</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="navbar">
+      <div class="container">
+        <div class="logo">
+          <h1>📊 Kaggle Learn</h1>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="breadcrumb"><a href="index.html">Beranda</a> / <a href="python.html">Python</a> / <span id="lesson-title">Detail Materi</span></div>
+
+      <div id="content" class="content-wrapper">
+        <!-- Content akan diisi oleh JavaScript -->
+      </div>
+
+      <div class="navigation">
+        <button class="nav-btn" id="prev-btn" onclick="previousLesson()">← Materi Sebelumnya</button>
+        <a href="python.html" class="nav-btn">Kembali ke Daftar Materi</a>
+        <button class="nav-btn" id="next-btn" onclick="nextLesson()">Materi Selanjutnya →</button>
+      </div>
+    </div>
+
+    <footer>
+      <p>&copy; 2024 Kaggle Learn Platform. Sumber: www.kaggle.com/learn</p>
+    </footer>
+
+    <script>
+      // Data materi Python
+      const pythonMaterials = [
+        {
+          id: 1,
+          title: "Syntax, Variables, and Numbers",
+          titleId: "Sintaks, Variabel, dan Angka",
+          content: `
+                    <div class="content-header">
+                        <h2>🐍 Sintaks, Variabel, dan Angka</h2>
+                        <p>Pelajari dasar-dasar pemrograman Python yang merupakan fondasi untuk semua kode Python yang Anda tulis.</p>
+                    </div>
+
+                    <div class="content-body">
+                        <h3>Apa itu Python?</h3>
+                        <p>Python adalah bahasa pemrograman yang dinamis, mudah dipelajari, dan sangat populer untuk data science, machine learning, dan aplikasi web. Python terkenal dengan syntaxnya yang bersih dan mudah dibaca.</p>
+
+                        <h3>Memulai dengan Python</h3>
+                        <p>Pertama, mari kita ketahui apa itu syntax. Syntax adalah aturan yang harus diikuti saat menulis kode. Ini seperti tata bahasa dalam bahasa Inggris.</p>
+
+                        <h4>Variabel</h4>
+                        <p>Variabel adalah wadah yang menyimpan nilai. Anda dapat membuat variabel dengan mendeklarasikan nama dan memberikan nilai:</p>
+                        <div class="code-block">
+nama = "Joni"
+umur = 25
+tinggi = 175.5
+                        </div>
+                        <p>Dalam contoh di atas:</p>
+                        <ul>
+                            <li><strong>nama</strong> adalah variabel yang menyimpan string "Joni"</li>
+                            <li><strong>umur</strong> adalah variabel yang menyimpan integer 25</li>
+                            <li><strong>tinggi</strong> adalah variabel yang menyimpan float 175.5</li>
+                        </ul>
+
+                        <h4>Tipe Data Numerik</h4>
+                        <p>Python memiliki dua tipe data numerik utama:</p>
+                        <ul>
+                            <li><strong>Integer (int)</strong>: Bilangan bulat tanpa desimal (contoh: -5, 0, 42)</li>
+                            <li><strong>Float</strong>: Bilangan dengan desimal (contoh: 3.14, -0.5, 2.0)</li>
+                        </ul>
+
+                        <div class="code-block">
+# Integer
+x = 10
+y = -5
+
+# Float
+a = 3.14
+b = 2.0
+
+# Operasi aritmatika
+print(10 + 5)    # Output: 15
+print(10 - 5)    # Output: 5
+print(10 * 5)    # Output: 50
+print(10 / 5)    # Output: 2.0
+print(10 // 3)   # Output: 3 (pembagian integer)
+print(10 % 3)    # Output: 1 (modulo/sisa pembagian)
+print(2 ** 3)    # Output: 8 (pangkat)
+                        </div>
+
+                        <h3>Penamaan Variabel</h3>
+                        <p>Ketika menamakan variabel, ikuti aturan ini:</p>
+                        <ul>
+                            <li>Harus dimulai dengan huruf atau underscore (_)</li>
+                            <li>Tidak boleh dimulai dengan angka</li>
+                            <li>Hanya boleh mengandung karakter alphanumeric dan underscore (A-z, 0-9, _)</li>
+                            <li>Nama variabel bersifat case-sensitive</li>
+                            <li>Gunakan nama yang deskriptif dan meaningful</li>
+                        </ul>
+
+                        <div class="code-block">
+# Nama yang benar
+my_variable = 10
+_private = 5
+variable1 = "hello"
+
+# Nama yang salah (akan menghasilkan error)
+# 1variable = 10
+# my-variable = 5
+# my variable = "hello"
+                        </div>
+
+                        <h3>Mengonversi Tipe Data</h3>
+                        <p>Anda dapat mengonversi tipe data menggunakan fungsi int(), float(), str():</p>
+                        <div class="code-block">
+# Konversi ke integer
+x = int("10")       # x = 10
+y = int(3.14)       # y = 3
+
+# Konversi ke float
+a = float("3.14")   # a = 3.14
+b = float(10)       # b = 10.0
+
+# Konversi ke string
+s = str(42)         # s = "42"
+t = str(3.14)       # t = "3.14"
+                        </div>
+
+                        <h3>Latihan Soal</h3>
+                        <p>Sekarang coba praktikkan apa yang sudah Anda pelajari:</p>
+                        <ul>
+                            <li>Buat variabel untuk menyimpan nama, umur, dan tinggi badan Anda</li>
+                            <li>Hitung luas persegi panjang dengan panjang 10 dan lebar 5</li>
+                            <li>Konversi string "25" menjadi integer dan lakukan operasi matematika</li>
+                        </ul>
+
+                        <h3>Ringkasan</h3>
+                        <p>Pada pelajaran ini, Anda telah mempelajari:</p>
+                        <ul>
+                            <li>✓ Apa itu syntax Python</li>
+                            <li>✓ Cara membuat dan menggunakan variabel</li>
+                            <li>✓ Tipe data numerik: integer dan float</li>
+                            <li>✓ Operasi aritmatika dasar</li>
+                            <li>✓ Aturan penamaan variabel</li>
+                            <li>✓ Konversi tipe data</li>
+                        </ul>
+                    </div>
+                `,
+        },
+        {
+          id: 2,
+          title: "Strings and Lists",
+          titleId: "String dan List",
+          content: `
+                    <div class="content-header">
+                        <h2>📝 String dan List</h2>
+                        <p>Pelajari cara bekerja dengan teks (string) dan koleksi data (list) di Python.</p>
+                    </div>
+
+                    <div class="content-body">
+                        <h3>Apa itu String?</h3>
+                        <p>String adalah urutan karakter yang digunakan untuk merepresentasikan teks. Di Python, string didefinisikan dengan tanda kutip tunggal (') atau ganda (").</p>
+                        
+                        <div class="code-block">
+nama = "Joni"
+pesan = 'Hello World'
+kalimat = "Ini adalah string yang panjang"
+
+# String dengan kutip ganda
+print("Dia berkata, \"Halo!\"")
+
+# String dengan kutip tunggal
+print('Ini adalah string dengan "kutip ganda"')
+                        </div>
+
+                        <h4>Operasi String</h4>
+                        <p>Ada banyak operasi yang dapat Anda lakukan dengan string:</p>
+                        
+                        <div class="code-block">
+# Concatenation (menggabungkan)
+nama_depan = "Joni"
+nama_belakang = "Doe"
+nama_lengkap = nama_depan + " " + nama_belakang
+print(nama_lengkap)  # Output: Joni Doe
+
+# Repetition (pengulangan)
+print("ha" * 3)  # Output: hahaha
+
+# Length (panjang string)
+print(len("Python"))  # Output: 6
+
+# Indexing (mengakses karakter)
+text = "Python"
+print(text[0])   # Output: P
+print(text[-1])  # Output: n
+
+# Slicing (mengambil bagian string)
+print(text[1:4])   # Output: yth
+print(text[:3])    # Output: Pyt
+print(text[2:])    # Output: thon
+                        </div>
+
+                        <h4>Method String</h4>
+                        <p>String memiliki banyak method yang berguna:</p>
+                        <div class="code-block">
+text = "Hello Python World"
+
+print(text.upper())          # HELLO PYTHON WORLD
+print(text.lower())          # hello python world
+print(text.capitalize())     # Hello python world
+print(text.find("Python"))   # 6 (posisi awal kata Python)
+print(text.replace("Python", "Java"))  # Hello Java World
+print(text.split())          # ['Hello', 'Python', 'World']
+print("  hello  ".strip())   # hello (menghilangkan spasi di awal/akhir)
+                        </div>
+
+                        <h3>Apa itu List?</h3>
+                        <p>List adalah koleksi item yang terurut dan dapat diubah. List didefinisikan dengan tanda kurung siku [].</p>
+                        
+                        <div class="code-block">
+# List dengan berbagai tipe data
+buah = ["apel", "mangga", "jeruk"]
+angka = [1, 2, 3, 4, 5]
+campuran = [1, "string", 3.14, True]
+list_kosong = []
+
+print(buah)  # Output: ['apel', 'mangga', 'jeruk']
+print(len(buah))  # Output: 3
+                        </div>
+
+                        <h4>Mengakses Elemen List</h4>
+                        <p>Gunakan index untuk mengakses elemen dalam list:</p>
+                        <div class="code-block">
+buah = ["apel", "mangga", "jeruk", "pisang"]
+
+# Indexing
+print(buah[0])    # apel
+print(buah[2])    # jeruk
+print(buah[-1])   # pisang (index negatif)
+
+# Slicing
+print(buah[0:2])  # ['apel', 'mangga']
+print(buah[1:])   # ['mangga', 'jeruk', 'pisang']
+print(buah[:2])   # ['apel', 'mangga']
+                        </div>
+
+                        <h4>Mengubah List</h4>
+                        <p>Anda dapat menambah, menghapus, dan mengubah elemen list:</p>
+                        <div class="code-block">
+buah = ["apel", "mangga"]
+
+# Menambah elemen
+buah.append("jeruk")
+print(buah)  # ['apel', 'mangga', 'jeruk']
+
+# Menambah elemen di posisi tertentu
+buah.insert(1, "anggur")
+print(buah)  # ['apel', 'anggur', 'mangga', 'jeruk']
+
+# Mengubah elemen
+buah[0] = "nanas"
+print(buah)  # ['nanas', 'anggur', 'mangga', 'jeruk']
+
+# Menghapus elemen
+buah.remove("anggur")
+print(buah)  # ['nanas', 'mangga', 'jeruk']
+
+# Menghapus berdasarkan index
+del buah[0]
+print(buah)  # ['mangga', 'jeruk']
+
+# Clear (menghapus semua)
+# buah.clear()
+# print(buah)  # []
+                        </div>
+
+                        <h4>Method List</h4>
+                        <p>List memiliki berbagai method yang berguna:</p>
+                        <div class="code-block">
+angka = [3, 1, 4, 1, 5, 9, 2, 6]
+
+print(angka.count(1))      # 2 (jumlah elemen 1)
+print(angka.index(4))      # 2 (posisi elemen 4)
+print(min(angka))          # 1 (nilai minimum)
+print(max(angka))          # 9 (nilai maksimum)
+print(sum(angka))          # 31 (total semua elemen)
+
+# Sort (mengurutkan)
+angka_copy = angka.copy()
+angka_copy.sort()
+print(angka_copy)          # [1, 1, 2, 3, 4, 5, 6, 9]
+
+# Reverse (membalik urutan)
+angka_copy.reverse()
+print(angka_copy)          # [9, 6, 5, 4, 3, 2, 1, 1]
+                        </div>
+
+                        <h3>Loop pada String dan List</h3>
+                        <p>Anda dapat melakukan iterasi pada string dan list dengan menggunakan for loop:</p>
+                        <div class="code-block">
+# Loop pada string
+for karakter in "Python":
+    print(karakter)
+
+# Loop pada list
+buah = ["apel", "mangga", "jeruk"]
+for item in buah:
+    print(item)
+
+# Loop dengan index
+for i in range(len(buah)):
+    print(f"{i}: {buah[i]}")
+                        </div>
+
+                        <h3>Ringkasan</h3>
+                        <p>Pada pelajaran ini, Anda telah mempelajari:</p>
+                        <ul>
+                            <li>✓ Apa itu string dan cara membuat string</li>
+                            <li>✓ Operasi string: concatenation, indexing, slicing</li>
+                            <li>✓ Method string yang berguna</li>
+                            <li>✓ Apa itu list dan cara membuat list</li>
+                            <li>✓ Mengakses elemen list dengan indexing dan slicing</li>
+                            <li>✓ Mengubah list: append, insert, remove, delete</li>
+                            <li>✓ Method list yang berguna</li>
+                            <li>✓ Loop pada string dan list</li>
+                        </ul>
+                    </div>
+                `,
+        },
+        {
+          id: 3,
+          title: "Dictionaries and Pandas",
+          titleId: "Dictionary dan Pandas",
+          content: `
+                    <div class="content-header">
+                        <h2>📚 Dictionary dan Pandas</h2>
+                        <p>Pelajari cara menggunakan dictionary dan library Pandas untuk manipulasi data yang lebih canggih.</p>
+                    </div>
+
+                    <div class="content-body">
+                        <h3>Apa itu Dictionary?</h3>
+                        <p>Dictionary adalah koleksi data yang tidak terurut, dapat diubah, dan tidak memiliki duplikat. Dictionary menggunakan pasangan key-value (kunci-nilai). Dictionary didefinisikan dengan tanda kurung kurawal {}.</p>
+                        
+                        <div class="code-block">
+# Membuat dictionary
+orang = {
+    "nama": "Joni",
+    "umur": 25,
+    "kota": "Jakarta",
+    "pekerjaan": "Engineer"
+}
+
+print(orang)
+# Output: {'nama': 'Joni', 'umur': 25, 'kota': 'Jakarta', 'pekerjaan': 'Engineer'}
+                        </div>
+
+                        <h4>Mengakses Nilai Dictionary</h4>
+                        <p>Gunakan key untuk mengakses nilai dalam dictionary:</p>
+                        <div class="code-block">
+orang = {"nama": "Joni", "umur": 25, "kota": "Jakarta"}
+
+print(orang["nama"])        # Joni
+print(orang["umur"])        # 25
+print(orang.get("kota"))    # Jakarta
+print(orang.get("alamat", "Tidak ada"))  # Tidak ada
+                        </div>
+
+                        <h4>Mengubah Dictionary</h4>
+                        <p>Anda dapat menambah, mengubah, dan menghapus elemen dictionary:</p>
+                        <div class="code-block">
+orang = {"nama": "Joni", "umur": 25}
+
+# Menambah elemen baru
+orang["kota"] = "Jakarta"
+orang["pekerjaan"] = "Engineer"
+
+# Mengubah nilai yang ada
+orang["umur"] = 26
+
+# Menghapus elemen
+del orang["pekerjaan"]
+
+# Clear (menghapus semua)
+# orang.clear()
+
+print(orang)
+                        </div>
+
+                        <h4>Method Dictionary</h4>
+                        <p>Dictionary memiliki method yang berguna:</p>
+                        <div class="code-block">
+orang = {"nama": "Joni", "umur": 25, "kota": "Jakarta"}
+
+print(orang.keys())         # dict_keys(['nama', 'umur', 'kota'])
+print(orang.values())       # dict_values(['Joni', 25, 'Jakarta'])
+print(orang.items())        # dict_items([('nama', 'Joni'), ('umur', 25), ('kota', 'Jakarta')])
+
+# Loop pada dictionary
+for key in orang:
+    print(f"{key}: {orang[key]}")
+
+for key, value in orang.items():
+    print(f"{key}: {value}")
+                        </div>
+
+                        <h3>Apa itu Pandas?</h3>
+                        <p>Pandas adalah library Python yang powerful untuk manipulasi dan analisis data. Pandas menyediakan struktur data seperti DataFrame yang mirip dengan tabel spreadsheet atau database.</p>
+
+                        <div class="code-block">
+import pandas as pd
+
+# Membuat DataFrame dari dictionary
+data = {
+    "nama": ["Joni", "Budi", "Siti"],
+    "umur": [25, 30, 28],
+    "kota": ["Jakarta", "Bandung", "Surabaya"]
+}
+
+df = pd.DataFrame(data)
+print(df)
+
+# Output:
+#    nama  umur     kota
+# 0  Joni    25  Jakarta
+# 1  Budi    30  Bandung
+# 2  Siti    28 Surabaya
+                        </div>
+
+                        <h4>Mengakses Data DataFrame</h4>
+                        <p>Ada berbagai cara untuk mengakses data dalam DataFrame:</p>
+                        <div class="code-block">
+# Mengakses kolom
+print(df["nama"])           # Akses satu kolom
+print(df[["nama", "umur"]]) # Akses multiple kolom
+
+# Mengakses baris
+print(df.loc[0])            # Akses baris berdasarkan label
+print(df.iloc[0])           # Akses baris berdasarkan index
+
+# Mengakses nilai spesifik
+print(df.loc[0, "nama"])    # Joni
+print(df.iloc[0, 0])        # Joni
+                        </div>
+
+                        <h4>Informasi DataFrame</h4>
+                        <p>Anda dapat melihat informasi tentang DataFrame:</p>
+                        <div class="code-block">
+print(df.shape)         # (3, 3) - 3 baris, 3 kolom
+print(df.columns)       # Nama-nama kolom
+print(df.dtypes)        # Tipe data setiap kolom
+print(df.info())        # Informasi lengkap
+print(df.describe())    # Statistik deskriptif
+
+print(df.head(2))       # 2 baris pertama
+print(df.tail(1))       # 1 baris terakhir
+                        </div>
+
+                        <h4>Operasi pada DataFrame</h4>
+                        <p>Anda dapat melakukan berbagai operasi pada DataFrame:</p>
+                        <div class="code-block">
+# Menambah kolom baru
+df["negara"] = "Indonesia"
+
+# Menghapus kolom
+# df = df.drop("negara", axis=1)
+
+# Filter data
+print(df[df["umur"] > 25])
+
+# Sorting
+print(df.sort_values("umur"))
+
+# Statistik
+print(df["umur"].mean())    # Rata-rata umur
+print(df["umur"].max())     # Umur maksimum
+print(df["umur"].min())     # Umur minimum
+                        </div>
+
+                        <h3>Ringkasan</h3>
+                        <p>Pada pelajaran ini, Anda telah mempelajari:</p>
+                        <ul>
+                            <li>✓ Apa itu dictionary dan cara membuat dictionary</li>
+                            <li>✓ Mengakses dan mengubah nilai dictionary</li>
+                            <li>✓ Method dictionary yang berguna</li>
+                            <li>✓ Pengenalan library Pandas</li>
+                            <li>✓ Membuat dan mengakses DataFrame</li>
+                            <li>✓ Operasi dasar pada DataFrame</li>
+                            <li>✓ Filtering, sorting, dan statistik pada DataFrame</li>
+                        </ul>
+                    </div>
+                `,
+        },
+        {
+          id: 4,
+          title: "Functions and Getting Help",
+          titleId: "Fungsi dan Bantuan",
+          content: `
+                    <div class="content-header">
+                        <h2>🔧 Fungsi dan Bantuan</h2>
+                        <p>Pelajari cara membuat fungsi untuk mengorganisir kode dan mencari bantuan.</p>
+                    </div>
+
+                    <div class="content-body">
+                        <h3>Apa itu Fungsi?</h3>
+                        <p>Fungsi adalah blok kode yang dirancang untuk melakukan tugas tertentu. Fungsi membuat kode Anda lebih terstruktur dan dapat digunakan kembali (reusable).</p>
+
+                        <h4>Mendefinisikan Fungsi</h4>
+                        <p>Gunakan keyword <code>def</code> untuk mendefinisikan fungsi:</p>
+                        
+                        <div class="code-block">
+def greet(name):
+    print(f"Halo, {name}!")
+
+greet("Joni")   # Output: Halo, Joni!
+greet("Budi")   # Output: Halo, Budi!
+                        </div>
+
+                        <h4>Return Statement</h4>
+                        <p>Fungsi dapat mengembalikan nilai menggunakan <code>return</code>:</p>
+                        <div class="code-block">
+def add(a, b):
+    return a + b
+
+result = add(10, 5)
+print(result)   # Output: 15
+
+def multiply(x, y):
+    hasil = x * y
+    return hasil
+
+print(multiply(4, 5))  # Output: 20
+                        </div>
+
+                        <h4>Parameter dan Argument</h4>
+                        <p>Fungsi dapat memiliki parameter (placeholder untuk data):</p>
+                        <div class="code-block">
+# Parameter dengan default value
+def greet(name, greeting="Halo"):
+    return f"{greeting}, {name}!"
+
+print(greet("Joni"))           # Halo, Joni!
+print(greet("Budi", "Hi"))     # Hi, Budi!
+
+# Multiple return values
+def get_info():
+    nama = "Joni"
+    umur = 25
+    return nama, umur
+
+nama, umur = get_info()
+print(f"{nama} berusia {umur} tahun")
+                        </div>
+
+                        <h4>*args dan **kwargs</h4>
+                        <p>Gunakan *args untuk menerima jumlah argument yang variabel:</p>
+                        <div class="code-block">
+def sum_all(*args):
+    total = 0
+    for num in args:
+        total += num
+    return total
+
+print(sum_all(1, 2, 3))        # 6
+print(sum_all(1, 2, 3, 4, 5))  # 15
+
+# Menggunakan **kwargs untuk keyword arguments
+def print_info(**kwargs):
+    for key, value in kwargs.items():
+        print(f"{key}: {value}")
+
+print_info(nama="Joni", umur=25, kota="Jakarta")
+                        </div>
+
+                        <h3>Scope Variabel</h3>
+                        <p>Scope menentukan di mana variabel dapat diakses:</p>
+                        <div class="code-block">
+# Global scope
+x = 10
+
+def func():
+    # Local scope
+    y = 5
+    print(x)  # Dapat mengakses variabel global
+    print(y)
+
+func()
+# print(y)  # Error! y tidak dapat diakses di sini
+
+# Mengubah variabel global
+count = 0
+
+def increment():
+    global count
+    count += 1
+
+increment()
+print(count)  # 1
+                        </div>
+
+                        <h3>Mendapatkan Bantuan</h3>
+                        <p>Python menyediakan cara untuk mendapatkan bantuan tentang fungsi dan object:</p>
+
+                        <div class="code-block">
+# Menggunakan help()
+help(print)         # Menampilkan bantuan untuk fungsi print
+help(str.upper)     # Menampilkan bantuan untuk method upper
+
+# Menggunakan ?
+# ?print             # Menampilkan bantuan di Jupyter Notebook
+
+# Menggunakan dir()
+print(dir("string"))  # Menampilkan semua method dan attribute
+
+# Type checking
+x = 10
+print(type(x))      # &lt;class 'int'&gt;
+
+# Len checking
+text = "Python"
+print(len(text))    # 6
+                        </div>
+
+                        <h4>Dokumentasi dan Docstring</h4>
+                        <p>Tulis dokumentasi untuk fungsi menggunakan docstring:</p>
+                        <div class="code-block">
+def calculate_area(length, width):
+    """
+    Menghitung luas persegi panjang.
+    
+    Parameters:
+        length: panjang persegi panjang
+        width: lebar persegi panjang
+    
+    Returns:
+        float: luas persegi panjang
+    """
+    return length * width
+
+help(calculate_area)
+print(calculate_area.__doc__)
+                        </div>
+
+                        <h3>Best Practices untuk Fungsi</h3>
+                        <ul>
+                            <li><strong>Nama yang deskriptif</strong>: Gunakan nama yang jelas tentang apa fungsi lakukan</li>
+                            <li><strong>Single responsibility</strong>: Setiap fungsi harus melakukan satu hal dengan baik</li>
+                            <li><strong>Hindari side effects</strong>: Jangan ubah state global tanpa perlu</li>
+                            <li><strong>Tulis docstring</strong>: Dokumentasikan apa yang fungsi lakukan</li>
+                            <li><strong>Tangani error</strong>: Antisipasi input yang salah</li>
+                        </ul>
+
+                        <h3>Ringkasan</h3>
+                        <p>Pada pelajaran ini, Anda telah mempelajari:</p>
+                        <ul>
+                            <li>✓ Cara mendefinisikan fungsi dengan <code>def</code></li>
+                            <li>✓ Parameter dan argument</li>
+                            <li>✓ Return statement untuk mengembalikan nilai</li>
+                            <li>✓ Default parameter values</li>
+                            <li>✓ *args dan **kwargs</li>
+                            <li>✓ Scope variabel (local dan global)</li>
+                            <li>✓ Cara mendapatkan bantuan dengan help(), dir(), type()</li>
+                            <li>✓ Docstring untuk dokumentasi fungsi</li>
+                        </ul>
+                    </div>
+                `,
+        },
+        {
+          id: 5,
+          title: "Booleans and Conditionals",
+          titleId: "Boolean dan Kondisional",
+          content: `
+                    <div class="content-header">
+                        <h2>🔀 Boolean dan Kondisional</h2>
+                        <p>Pelajari cara menggunakan boolean dan statement kondisional untuk kontrol logika program.</p>
+                    </div>
+
+                    <div class="content-body">
+                        <h3>Apa itu Boolean?</h3>
+                        <p>Boolean adalah tipe data yang hanya memiliki dua nilai: <code>True</code> (benar) dan <code>False</code> (salah). Boolean digunakan untuk logika dan kondisi.</p>
+
+                        <div class="code-block">
+x = True
+y = False
+
+print(x)         # True
+print(y)         # False
+print(type(x))   # &lt;class 'bool'&gt;
+                        </div>
+
+                        <h3>Operator Perbandingan</h3>
+                        <p>Operator perbandingan membandingkan nilai dan mengembalikan boolean:</p>
+                        
+                        <div class="code-block">
+# Sama dengan
+print(5 == 5)   # True
+print(5 == 3)   # False
+
+# Tidak sama dengan
+print(5 != 3)   # True
+print(5 != 5)   # False
+
+# Lebih dari
+print(5 > 3)    # True
+print(3 > 5)    # False
+
+# Kurang dari
+print(3 < 5)    # True
+print(5 < 3)    # False
+
+# Lebih dari atau sama dengan
+print(5 >= 5)   # True
+print(3 >= 5)   # False
+
+# Kurang dari atau sama dengan
+print(3 <= 5)   # True
+print(5 <= 3)   # False
+                        </div>
+
+                        <h3>Operator Logika</h3>
+                        <p>Operator logika menggabungkan kondisi boolean:</p>
+
+                        <div class="code-block">
+# AND - semua kondisi harus True
+print(True and True)    # True
+print(True and False)   # False
+print(False and False)  # False
+
+# OR - minimal satu kondisi harus True
+print(True or False)    # True
+print(False or False)   # False
+print(True or True)     # True
+
+# NOT - membalik nilai boolean
+print(not True)         # False
+print(not False)        # True
+                        </div>
+
+                        <div class="code-block">
+# Contoh praktis
+umur = 25
+has_license = True
+
+# Untuk mengemudi, harus umur >= 17 dan memiliki SIM
+dapat_mengemudi = umur >= 17 and has_license
+print(dapat_mengemudi)  # True
+
+# Kondisi lebih kompleks
+nilai = 80
+adalah_lulus = nilai >= 60
+adalah_lulus_baik = nilai >= 75
+
+print(adalah_lulus or adalah_lulus_baik)  # True
+                        </div>
+
+                        <h3>Statement If-Else</h3>
+                        <p>Gunakan <code>if</code>, <code>elif</code>, dan <code>else</code> untuk kontrol alur program:</p>
+
+                        <div class="code-block">
+# If statement
+age = 20
+
+if age >= 18:
+    print("Anda sudah dewasa")
+
+# If-else statement
+if age >= 18:
+    print("Anda sudah dewasa")
+else:
+    print("Anda masih anak-anak")
+
+# If-elif-else statement
+nilai = 85
+
+if nilai >= 90:
+    print("Grade A")
+elif nilai >= 80:
+    print("Grade B")
+elif nilai >= 70:
+    print("Grade C")
+else:
+    print("Grade D")
+                        </div>
+
+                        <h4>Nested If</h4>
+                        <p>Anda dapat menyarangkan (nesting) statement if:</p>
+                        <div class="code-block">
+umur = 25
+memiliki_sim = True
+memiliki_mobil = True
+
+if umur >= 18:
+    if memiliki_sim:
+        if memiliki_mobil:
+            print("Anda dapat mengemudi")
+        else:
+            print("Anda perlu membeli mobil")
+    else:
+        print("Anda perlu mengurus SIM")
+else:
+    print("Anda terlalu muda untuk mengemudi")
+                        </div>
+
+                        <h3>Ternary Operator</h3>
+                        <p>Cara ringkas untuk menulis if-else dalam satu baris:</p>
+
+                        <div class="code-block">
+age = 20
+status = "Dewasa" if age >= 18 else "Anak-anak"
+print(status)  # Dewasa
+
+# Contoh lain
+nilai = 80
+grade = "Lulus" if nilai >= 60 else "Tidak Lulus"
+print(grade)  # Lulus
+                        </div>
+
+                        <h3>Truthiness dan Falsiness</h3>
+                        <p>Dalam Python, banyak nilai yang dianggap True atau False dalam konteks boolean:</p>
+
+                        <div class="code-block">
+# Falsy values (dianggap False)
+print(bool(0))          # False
+print(bool(0.0))        # False
+print(bool(""))         # False (string kosong)
+print(bool([]))         # False (list kosong)
+print(bool({}))         # False (dictionary kosong)
+print(bool(None))       # False
+
+# Truthy values (dianggap True)
+print(bool(1))          # True
+print(bool(-1))         # True
+print(bool("hello"))    # True (string tidak kosong)
+print(bool([1, 2]))     # True (list tidak kosong)
+
+# Contoh praktis
+nama = input("Masukkan nama: ")
+if nama:
+    print(f"Halo, {nama}!")
+else:
+    print("Nama tidak boleh kosong!")
+                        </div>
+
+                        <h3>In dan Is Operator</h3>
+                        <p>Operator khusus untuk pengecekan membership dan identity:</p>
+
+                        <div class="code-block">
+# In operator - cek apakah elemen ada dalam koleksi
+buah = ["apel", "mangga", "jeruk"]
+print("apel" in buah)       # True
+print("pisang" in buah)     # False
+
+text = "Python"
+print("P" in text)          # True
+
+# Is operator - cek apakah object adalah yang sama
+x = [1, 2, 3]
+y = [1, 2, 3]
+z = x
+
+print(x == y)   # True (nilai sama)
+print(x is y)   # False (object berbeda)
+print(x is z)   # True (object yang sama)
+
+# Cek None
+value = None
+if value is None:
+    print("Value adalah None")
+                        </div>
+
+                        <h3>Ringkasan</h3>
+                        <p>Pada pelajaran ini, Anda telah mempelajari:</p>
+                        <ul>
+                            <li>✓ Tipe data boolean (True dan False)</li>
+                            <li>✓ Operator perbandingan (==, !=, >, <, >=, <=)</li>
+                            <li>✓ Operator logika (and, or, not)</li>
+                            <li>✓ Statement if, elif, else</li>
+                            <li>✓ Nested if statements</li>
+                            <li>✓ Ternary operator untuk if-else singkat</li>
+                            <li>✓ Truthiness dan falsiness</li>
+                            <li>✓ In dan is operator</li>
+                        </ul>
+                    </div>
+                `,
+        },
+      ];
+
+      // Get lesson ID from URL
+      function getLessonId() {
+        const params = new URLSearchParams(window.location.search);
+        return parseInt(params.get("lesson")) || 1;
+      }
+
+      // Display content
+      function displayLesson(lessonId) {
+        const lesson = pythonMaterials.find((m) => m.id === lessonId);
+        if (lesson) {
+          document.getElementById("lesson-title").textContent = lesson.titleId;
+          document.getElementById("content").innerHTML = lesson.content;
+          updateNavigationButtons(lessonId);
+        }
+      }
+
+      // Update navigation buttons
+      function updateNavigationButtons(lessonId) {
+        const prevBtn = document.getElementById("prev-btn");
+        const nextBtn = document.getElementById("next-btn");
+
+        if (lessonId === 1) {
+          prevBtn.disabled = true;
+          prevBtn.style.opacity = "0.5";
+        } else {
+          prevBtn.disabled = false;
+          prevBtn.style.opacity = "1";
+        }
+
+        if (lessonId === pythonMaterials.length) {
+          nextBtn.disabled = true;
+          nextBtn.style.opacity = "0.5";
+        } else {
+          nextBtn.disabled = false;
+          nextBtn.style.opacity = "1";
+        }
+      }
+
+      // Navigation functions
+      function previousLesson() {
+        let currentId = getLessonId();
+        if (currentId > 1) {
+          window.location.search = "?lesson=" + (currentId - 1);
+        }
+      }
+
+      function nextLesson() {
+        let currentId = getLessonId();
+        if (currentId < pythonMaterials.length) {
+          window.location.search = "?lesson=" + (currentId + 1);
+        }
+      }
+
+      // Load lesson on page load
+      window.onload = function () {
+        displayLesson(getLessonId());
+      };
+    </script>
+  </body>
+</html>

@@ -1,0 +1,1506 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Money Bag – Digital Wallet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --dark: #080817;
+        --card: #11122a;
+        --surface: #1a1b38;
+        --surface2: #22244a;
+        --border: #2e3060;
+        --accent: #7c6fff;
+        --accent2: #00e5b0;
+        --accent3: #ff5f7e;
+        --yellow: #ffd166;
+        --text: #e2e4f3;
+        --muted: #6b6d96;
+        --white: #ffffff;
+        --input: #1e2042;
+        --green: #00e5b0;
+        --red: #ff5f7e;
+        --r: 44px;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100%;
+        overflow: hidden;
+      }
+      body {
+        font-family: "DM Sans", sans-serif;
+        background: var(--dark);
+        color: var(--text);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        position: relative;
+      }
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background: radial-gradient(ellipse 60% 50% at 20% 20%, rgba(124, 111, 255, 0.12) 0%, transparent 60%), radial-gradient(ellipse 50% 40% at 80% 80%, rgba(0, 229, 176, 0.08) 0%, transparent 60%);
+        pointer-events: none;
+      }
+
+      /* PHONE FRAME */
+      .phone-wrap {
+        position: relative;
+        width: 360px;
+        height: 720px;
+        flex-shrink: 0;
+      }
+      .phone-shell {
+        width: 100%;
+        height: 100%;
+        background: var(--card);
+        border-radius: var(--r);
+        border: 1.5px solid var(--border);
+        overflow: hidden;
+        box-shadow:
+          0 50px 100px rgba(0, 0, 0, 0.7),
+          0 0 0 0.5px rgba(255, 255, 255, 0.04) inset,
+          inset 0 1px 0 rgba(255, 255, 255, 0.07);
+        position: relative;
+      }
+      .notch {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100px;
+        height: 24px;
+        background: #050510;
+        border-radius: 0 0 18px 18px;
+        z-index: 20;
+      }
+
+      /* SCREENS */
+      .screen {
+        position: absolute;
+        inset: 0;
+        display: none;
+        flex-direction: column;
+        opacity: 0;
+        transform: translateX(30px);
+        transition:
+          opacity 0.35s ease,
+          transform 0.35s ease;
+      }
+      .screen.active {
+        display: flex;
+        opacity: 1;
+        transform: translateX(0);
+      }
+      .screen.exit {
+        display: flex;
+        opacity: 0;
+        transform: translateX(-30px);
+      }
+
+      /* STATUS BAR */
+      .sbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 16px 22px 6px;
+        font-size: 0.62rem;
+        font-weight: 600;
+        color: var(--text);
+        flex-shrink: 0;
+        position: relative;
+        z-index: 5;
+      }
+      .sbar-right {
+        display: flex;
+        gap: 4px;
+        align-items: center;
+      }
+
+      /* BODY */
+      .sbody {
+        flex: 1;
+        overflow-y: auto;
+        overflow-x: hidden;
+        padding: 0 24px 28px;
+      }
+      .sbody::-webkit-scrollbar {
+        display: none;
+      }
+
+      /* SCREEN 1: OPENING */
+      #s-open {
+        background: linear-gradient(160deg, #14103a 0%, #080817 55%, #0b1828 100%);
+      }
+      #s-open .sbody {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 14px;
+        padding-bottom: 40px;
+      }
+      .splash-logo {
+        width: 90px;
+        height: 90px;
+        background: linear-gradient(135deg, var(--accent), var(--accent2));
+        border-radius: 28px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2.4rem;
+        box-shadow:
+          0 24px 48px rgba(124, 111, 255, 0.45),
+          0 0 0 1px rgba(255, 255, 255, 0.08) inset;
+        animation: logoPop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s both;
+      }
+      @keyframes logoPop {
+        from {
+          transform: scale(0.6);
+          opacity: 0;
+        }
+        to {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+      .splash-name {
+        font-family: "Sora", sans-serif;
+        font-size: 1.6rem;
+        font-weight: 800;
+        color: var(--white);
+        letter-spacing: -0.5px;
+      }
+      .splash-tag {
+        font-size: 0.75rem;
+        color: var(--muted);
+        text-align: center;
+      }
+      .splash-credit {
+        font-size: 0.58rem;
+        color: var(--muted);
+        opacity: 0.4;
+        text-align: center;
+        margin-top: 32px;
+        line-height: 1.7;
+      }
+      .splash-btn {
+        margin-top: 16px;
+        background: linear-gradient(135deg, var(--accent), #a78bfa);
+        color: white;
+        border: none;
+        border-radius: 16px;
+        padding: 14px 48px;
+        font-family: "Sora", sans-serif;
+        font-size: 0.82rem;
+        font-weight: 700;
+        cursor: pointer;
+        letter-spacing: 0.3px;
+        box-shadow: 0 10px 28px rgba(124, 111, 255, 0.45);
+        transition:
+          transform 0.15s,
+          box-shadow 0.15s;
+      }
+      .splash-btn:active {
+        transform: scale(0.97);
+      }
+
+      /* SCREEN 2: WELCOME */
+      #s-welcome {
+        background: var(--card);
+      }
+      #s-welcome .sbody {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 18px;
+      }
+      .welcome-img {
+        width: 140px;
+        height: 140px;
+        background: var(--surface);
+        border-radius: 28px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 4rem;
+        border: 1px solid var(--border);
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
+      }
+      .welcome-title {
+        font-family: "Sora", sans-serif;
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: var(--white);
+        text-align: center;
+        line-height: 1.4;
+      }
+      .btn-row {
+        display: flex;
+        flex-direction: column;
+        gap: 11px;
+        width: 100%;
+      }
+
+      /* SHARED COMPONENTS */
+      .btn-p {
+        width: 100%;
+        background: linear-gradient(135deg, var(--accent), #a78bfa);
+        color: white;
+        border: none;
+        border-radius: 14px;
+        padding: 14px;
+        font-family: "Sora", sans-serif;
+        font-size: 0.8rem;
+        font-weight: 700;
+        cursor: pointer;
+        letter-spacing: 0.3px;
+        box-shadow: 0 8px 22px rgba(124, 111, 255, 0.38);
+        transition: transform 0.12s;
+      }
+      .btn-p:active {
+        transform: scale(0.98);
+      }
+      .btn-s {
+        width: 100%;
+        background: transparent;
+        color: var(--accent);
+        border: 1.5px solid var(--accent);
+        border-radius: 14px;
+        padding: 13px;
+        font-family: "Sora", sans-serif;
+        font-size: 0.8rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: background 0.15s;
+      }
+      .btn-s:hover {
+        background: rgba(124, 111, 255, 0.08);
+      }
+      .btn-ghost {
+        flex: 1;
+        background: var(--surface);
+        border: 1.5px solid var(--border);
+        border-radius: 12px;
+        padding: 12px;
+        font-family: "Sora", sans-serif;
+        font-size: 0.76rem;
+        font-weight: 600;
+        color: var(--text);
+        cursor: pointer;
+      }
+      .screen-title {
+        font-family: "Sora", sans-serif;
+        font-size: 1.25rem;
+        font-weight: 800;
+        color: var(--white);
+        text-align: center;
+        margin-bottom: 22px;
+        margin-top: 8px;
+      }
+      .fg {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        margin-bottom: 14px;
+      }
+      .flabel {
+        font-size: 0.68rem;
+        font-weight: 600;
+        color: var(--muted);
+      }
+      .finput {
+        background: var(--input);
+        border: 1.5px solid var(--border);
+        border-radius: 11px;
+        padding: 12px 14px;
+        color: var(--text);
+        font-family: "DM Sans", sans-serif;
+        font-size: 0.78rem;
+        outline: none;
+        transition: border-color 0.2s;
+        width: 100%;
+      }
+      .finput:focus {
+        border-color: var(--accent);
+      }
+      .finput::placeholder {
+        color: var(--muted);
+        opacity: 0.55;
+      }
+      .divider {
+        text-align: center;
+        font-size: 0.65rem;
+        color: var(--muted);
+        margin: 13px 0;
+        position: relative;
+      }
+      .divider::before,
+      .divider::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        width: 38%;
+        height: 1px;
+        background: var(--border);
+      }
+      .divider::before {
+        left: 0;
+      }
+      .divider::after {
+        right: 0;
+      }
+      .social-row {
+        display: flex;
+        gap: 10px;
+      }
+      .sbtn {
+        flex: 1;
+        background: var(--surface);
+        border: 1.5px solid var(--border);
+        border-radius: 11px;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        font-size: 0.7rem;
+        color: var(--text);
+        cursor: pointer;
+        transition: border-color 0.15s;
+      }
+      .sbtn:hover {
+        border-color: var(--accent);
+      }
+      .small-link {
+        text-align: center;
+        font-size: 0.65rem;
+        color: var(--muted);
+        margin-top: 13px;
+      }
+      .small-link a {
+        color: var(--accent);
+        text-decoration: none;
+        font-weight: 600;
+      }
+      .back-btn {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        background: none;
+        border: none;
+        color: var(--muted);
+        font-size: 0.72rem;
+        cursor: pointer;
+        padding: 0;
+        margin-bottom: 16px;
+        font-family: "DM Sans", sans-serif;
+      }
+      .back-btn:hover {
+        color: var(--text);
+      }
+
+      /* SCREEN 3: LOGIN */
+      #s-login {
+        background: var(--card);
+      }
+      #s-login .sbody {
+        padding-top: 14px;
+      }
+      .form-meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16px;
+      }
+      .remember {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 0.66rem;
+        color: var(--muted);
+      }
+      .remember input {
+        accent-color: var(--accent);
+      }
+      .forgot-link {
+        font-size: 0.66rem;
+        color: var(--accent);
+        cursor: pointer;
+        background: none;
+        border: none;
+        font-family: "DM Sans", sans-serif;
+      }
+
+      /* SCREEN 4: FORGOT PASSWORD */
+      #s-forgot {
+        background: var(--card);
+      }
+      #s-forgot .sbody {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 14px;
+        padding-top: 14px;
+      }
+      .center-icon {
+        width: 68px;
+        height: 68px;
+        background: var(--surface);
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        border: 1.5px solid var(--border);
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+      }
+      .center-title {
+        font-family: "Sora", sans-serif;
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--white);
+      }
+      .center-desc {
+        font-size: 0.7rem;
+        color: var(--muted);
+        text-align: center;
+        line-height: 1.6;
+      }
+      .tab-pills {
+        display: flex;
+        background: var(--surface);
+        border-radius: 11px;
+        padding: 4px;
+        width: 100%;
+      }
+      .tab-pill {
+        flex: 1;
+        padding: 9px;
+        border: none;
+        border-radius: 8px;
+        font-size: 0.66rem;
+        font-weight: 600;
+        cursor: pointer;
+        background: transparent;
+        color: var(--muted);
+        font-family: "DM Sans", sans-serif;
+        transition: all 0.2s;
+      }
+      .tab-pill.active {
+        background: var(--accent);
+        color: white;
+        box-shadow: 0 4px 12px rgba(124, 111, 255, 0.4);
+      }
+
+      /* SCREEN 5–8 */
+      #s-reset {
+        background: var(--card);
+      }
+      #s-reset .sbody {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+      }
+      #s-signup {
+        background: var(--card);
+      }
+      #s-signup .sbody {
+        padding-top: 14px;
+      }
+      #s-verify {
+        background: var(--card);
+      }
+      #s-verify .sbody {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 18px;
+      }
+      .otp-row {
+        display: flex;
+        gap: 12px;
+      }
+      .otp-box {
+        width: 56px;
+        height: 58px;
+        background: var(--input);
+        border: 2px solid var(--accent);
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "Sora", sans-serif;
+        font-size: 1.5rem;
+        font-weight: 800;
+        color: var(--white);
+        box-shadow: 0 0 16px rgba(124, 111, 255, 0.2);
+      }
+      .two-btns {
+        display: flex;
+        gap: 10px;
+        width: 100%;
+      }
+      #s-congrats {
+        background: var(--card);
+      }
+      #s-congrats .sbody {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+      }
+      .confetti-icon {
+        font-size: 5rem;
+        animation: bounce 1s ease infinite alternate;
+      }
+      @keyframes bounce {
+        from {
+          transform: translateY(0);
+        }
+        to {
+          transform: translateY(-10px);
+        }
+      }
+      .tick-circle {
+        width: 72px;
+        height: 72px;
+        background: linear-gradient(135deg, var(--accent2), #00b894);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        box-shadow: 0 16px 40px rgba(0, 229, 176, 0.4);
+      }
+
+      /* SCREEN 9: HOME */
+      #s-home {
+        background: var(--dark);
+      }
+      #s-home .sbody {
+        padding: 0 0 80px 0;
+      }
+      .home-topbar {
+        background: linear-gradient(160deg, #1a1040 0%, #0d1230 100%);
+        padding: 12px 22px 18px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-shrink: 0;
+      }
+      .home-title {
+        font-family: "Sora", sans-serif;
+        font-size: 0.9rem;
+        font-weight: 800;
+        color: var(--white);
+      }
+      .add-card-btn {
+        background: var(--accent);
+        color: white;
+        border: none;
+        border-radius: 9px;
+        padding: 7px 13px;
+        font-family: "Sora", sans-serif;
+        font-size: 0.6rem;
+        font-weight: 700;
+        cursor: pointer;
+      }
+      .ham-btn {
+        font-size: 1.2rem;
+        cursor: pointer;
+        color: var(--text);
+        background: none;
+        border: none;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        padding: 4px;
+      }
+      .ham-line {
+        width: 18px;
+        height: 2px;
+        background: var(--text);
+        border-radius: 2px;
+        display: block;
+      }
+
+      .credit-card {
+        margin: 16px 16px 0;
+        background: linear-gradient(135deg, #3730a3 0%, #1e1b4b 50%, #0f0e2a 100%);
+        border-radius: 20px;
+        padding: 20px;
+        position: relative;
+        overflow: hidden;
+        border: 1px solid rgba(124, 111, 255, 0.25);
+        box-shadow: 0 20px 48px rgba(0, 0, 0, 0.4);
+      }
+      .credit-card::before {
+        content: "";
+        position: absolute;
+        width: 160px;
+        height: 160px;
+        border-radius: 50%;
+        background: rgba(124, 111, 255, 0.18);
+        top: -50px;
+        right: -40px;
+      }
+      .credit-card::after {
+        content: "";
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background: rgba(0, 229, 176, 0.08);
+        bottom: -30px;
+        right: 80px;
+      }
+      .card-chip {
+        width: 30px;
+        height: 24px;
+        background: linear-gradient(135deg, #d4af37, #f5c842);
+        border-radius: 5px;
+        margin-bottom: 16px;
+      }
+      .card-num {
+        font-family: "Sora", sans-serif;
+        font-size: 0.88rem;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.9);
+        letter-spacing: 2.5px;
+        margin-bottom: 14px;
+      }
+      .card-foot {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+      }
+      .card-lbl {
+        font-size: 0.52rem;
+        color: rgba(255, 255, 255, 0.45);
+        margin-bottom: 2px;
+      }
+      .card-val {
+        font-size: 0.72rem;
+        font-weight: 600;
+        color: white;
+      }
+      .card-logo {
+        font-size: 1.8rem;
+      }
+
+      .balance-row {
+        display: flex;
+        gap: 10px;
+        margin: 14px 16px 0;
+      }
+      .bal-card {
+        flex: 1;
+        background: var(--surface);
+        border-radius: 16px;
+        padding: 13px;
+        border: 1px solid var(--border);
+      }
+      .bal-label {
+        font-size: 0.54rem;
+        color: var(--muted);
+        margin-bottom: 4px;
+      }
+      .bal-amount {
+        font-family: "Sora", sans-serif;
+        font-size: 0.95rem;
+        font-weight: 800;
+        color: var(--white);
+      }
+      .bal-sub {
+        font-size: 0.5rem;
+        margin-top: 3px;
+      }
+      .up {
+        color: var(--green);
+      }
+      .down {
+        color: var(--red);
+      }
+
+      .sec-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 16px 16px 10px;
+      }
+      .sec-title {
+        font-family: "Sora", sans-serif;
+        font-size: 0.78rem;
+        font-weight: 700;
+        color: var(--white);
+      }
+      .see-all {
+        font-size: 0.6rem;
+        color: var(--accent);
+        background: var(--surface);
+        border: none;
+        border-radius: 7px;
+        padding: 5px 9px;
+        cursor: pointer;
+      }
+
+      .quick-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 8px;
+        padding: 0 16px;
+      }
+      .qa-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 7px;
+        cursor: pointer;
+      }
+      .qa-icon {
+        width: 48px;
+        height: 48px;
+        background: var(--surface);
+        border-radius: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        border: 1px solid var(--border);
+        transition:
+          transform 0.15s,
+          background 0.15s;
+      }
+      .qa-item:active .qa-icon {
+        transform: scale(0.9);
+        background: var(--surface2);
+      }
+      .qa-label {
+        font-size: 0.55rem;
+        color: var(--muted);
+        text-align: center;
+      }
+
+      .txns {
+        padding: 0 16px;
+      }
+      .txn {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 11px 0;
+        border-bottom: 1px solid rgba(46, 48, 96, 0.4);
+      }
+      .txn-ico {
+        width: 38px;
+        height: 38px;
+        background: var(--surface);
+        border-radius: 11px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.05rem;
+        flex-shrink: 0;
+      }
+      .txn-inf {
+        flex: 1;
+      }
+      .txn-name {
+        font-size: 0.72rem;
+        font-weight: 600;
+        color: var(--white);
+      }
+      .txn-date {
+        font-size: 0.55rem;
+        color: var(--muted);
+        margin-top: 2px;
+      }
+      .txn-amt {
+        font-family: "Sora", sans-serif;
+        font-size: 0.78rem;
+        font-weight: 700;
+      }
+
+      /* BOTTOM NAV */
+      .bottom-nav {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: var(--card);
+        border-top: 1px solid var(--border);
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 12px 0 18px;
+        border-radius: 0 0 calc(var(--r) - 2px) calc(var(--r) - 2px);
+        z-index: 10;
+      }
+      .nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+        cursor: pointer;
+        font-size: 0.55rem;
+        color: var(--muted);
+        padding: 6px 16px;
+        border-radius: 12px;
+        transition: all 0.15s;
+      }
+      .nav-item.active {
+        color: var(--accent);
+      }
+      .nav-item .ni {
+        font-size: 1.3rem;
+      }
+      .nav-center {
+        width: 52px;
+        height: 52px;
+        background: linear-gradient(135deg, var(--accent), #a78bfa);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.3rem;
+        cursor: pointer;
+        margin-top: -24px;
+        box-shadow: 0 8px 24px rgba(124, 111, 255, 0.5);
+      }
+
+      /* LOGOUT/HOME BUTTON di home */
+      .home-back-btn {
+        margin: 14px 16px 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        background: rgba(255, 95, 126, 0.1);
+        border: 1.5px solid rgba(255, 95, 126, 0.3);
+        border-radius: 14px;
+        padding: 12px;
+        font-family: "Sora", sans-serif;
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: var(--red);
+        cursor: pointer;
+        width: calc(100% - 32px);
+        transition:
+          background 0.15s,
+          border-color 0.15s;
+      }
+      .home-back-btn:hover {
+        background: rgba(255, 95, 126, 0.18);
+        border-color: rgba(255, 95, 126, 0.5);
+      }
+
+      /* SIDE PANEL */
+      .code-panel {
+        margin-left: 32px;
+        width: 340px;
+        background: rgba(17, 18, 42, 0.95);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        padding: 24px;
+        max-height: 720px;
+        overflow-y: auto;
+      }
+      .code-panel::-webkit-scrollbar {
+        display: none;
+      }
+      .cp-title {
+        font-family: "Sora", sans-serif;
+        font-size: 0.82rem;
+        font-weight: 700;
+        color: var(--accent2);
+        margin-bottom: 16px;
+        letter-spacing: 0.5px;
+      }
+      .cp-label {
+        font-size: 0.65rem;
+        font-weight: 600;
+        color: var(--muted);
+        margin-bottom: 8px;
+        margin-top: 16px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+      .flow-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 9px 12px;
+        background: var(--surface);
+        border-radius: 10px;
+        margin-bottom: 6px;
+        border: 1px solid transparent;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .flow-item:hover {
+        border-color: var(--accent);
+        background: var(--surface2);
+      }
+      .flow-item.current {
+        border-color: var(--accent2);
+        background: rgba(0, 229, 176, 0.06);
+      }
+      .fi-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--muted);
+        flex-shrink: 0;
+      }
+      .flow-item.current .fi-dot {
+        background: var(--accent2);
+      }
+      .fi-name {
+        font-size: 0.7rem;
+        color: var(--text);
+      }
+      .fi-arrow {
+        margin-left: auto;
+        font-size: 0.6rem;
+        color: var(--muted);
+      }
+      .cp-divider {
+        height: 1px;
+        background: var(--border);
+        margin: 18px 0;
+      }
+      .code-block {
+        background: #08091c;
+        border-radius: 10px;
+        padding: 14px;
+        font-family: "Courier New", monospace;
+        font-size: 0.58rem;
+        color: #a5b4fc;
+        line-height: 1.8;
+        border: 1px solid var(--border);
+        overflow-x: auto;
+        white-space: pre;
+        max-height: 260px;
+        overflow-y: auto;
+      }
+      /* KEMBALI BUTTON */
+      .kembali-btn {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: linear-gradient(135deg, #ff5f7e, #ff7f9c);
+        color: white;
+        border: none;
+        border-radius: 12px;
+        padding: 12px 24px;
+        font-family: "Sora", sans-serif;
+        font-size: 0.85rem;
+        font-weight: 600;
+        cursor: pointer;
+        box-shadow: 0 8px 24px rgba(255, 95, 126, 0.4);
+        transition: all 0.3s ease;
+        z-index: 100;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .kembali-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 32px rgba(255, 95, 126, 0.5);
+      }
+      .code-block::-webkit-scrollbar {
+        display: none;
+      }
+      .c-kw {
+        color: #c084fc;
+      }
+      .c-str {
+        color: #86efac;
+      }
+      .c-fn {
+        color: #67e8f9;
+      }
+      .c-cm {
+        color: #475569;
+      }
+
+      .outer {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        padding: 24px;
+      }
+    </style>
+  </head>
+  <body>
+    <a href="../index.html#projects" class="kembali-btn">← Kembali ke Projects</a>
+    <div class="outer">
+      <!-- PHONE -->
+      <div class="phone-wrap">
+        <div class="phone-shell">
+          <div class="notch"></div>
+
+          <!-- ① OPENING -->
+          <div class="screen active" id="s-open">
+            <div class="sbar">
+              <span style="font-family: &quot;Sora&quot;, sans-serif">12:00</span>
+              <div class="sbar-right"><span>▪▪▪</span><span>🔋</span></div>
+            </div>
+            <div class="sbody">
+              <div class="splash-logo">💰</div>
+              <div class="splash-name">Money Bag</div>
+              <div class="splash-tag">Your smart digital wallet</div>
+              <button class="splash-btn" onclick="go('s-welcome')">Get Started →</button>
+              <div class="splash-credit">Designed By Figma Store Community<br />Free Template · Converted to HTML</div>
+            </div>
+          </div>
+
+          <!-- ② WELCOME -->
+          <div class="screen" id="s-welcome">
+            <div class="sbar">
+              <span style="font-family: &quot;Sora&quot;, sans-serif">12:00</span>
+              <div class="sbar-right"><span>▪▪▪</span><span>🔋</span></div>
+            </div>
+            <div class="sbody">
+              <div class="welcome-img">💳</div>
+              <div class="welcome-title">Welcome To<br />Money Bag</div>
+              <div style="font-size: 0.72rem; color: var(--muted); text-align: center; margin-top: -4px">Manage your finances, anywhere.</div>
+              <div class="btn-row" style="margin-top: 8px">
+                <button class="btn-p" onclick="go('s-signup')">Sign Up</button>
+                <button class="btn-s" onclick="go('s-login')">Log In</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- ③ LOGIN -->
+          <div class="screen" id="s-login">
+            <div class="sbar">
+              <span style="font-family: &quot;Sora&quot;, sans-serif">12:00</span>
+              <div class="sbar-right"><span>▪▪▪</span><span>🔋</span></div>
+            </div>
+            <div class="sbody">
+              <button class="back-btn" onclick="go('s-welcome')">← Back</button>
+              <div class="screen-title">Log In</div>
+              <div class="fg">
+                <label class="flabel">Email</label>
+                <input class="finput" type="email" placeholder="Enter your email" />
+              </div>
+              <div class="fg">
+                <label class="flabel">Password</label>
+                <input class="finput" type="password" placeholder="Enter your password" />
+              </div>
+              <div class="form-meta">
+                <label class="remember"><input type="checkbox" /> Remember Me</label>
+                <button class="forgot-link" onclick="go('s-forgot')">Forgot Password?</button>
+              </div>
+              <button class="btn-p" onclick="go('s-home')">Log In</button>
+              <div class="divider">Or Continue With</div>
+              <div class="social-row">
+                <button class="sbtn" onclick="go('s-home')">🇬 Google</button>
+                <button class="sbtn" onclick="go('s-home')">f Facebook</button>
+              </div>
+              <div class="small-link">
+                Don't have an account?
+                <a
+                  href="#"
+                  onclick="
+                    go('s-signup');
+                    return false;
+                  "
+                  >Sign Up</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- ④ FORGOT PASSWORD -->
+          <div class="screen" id="s-forgot">
+            <div class="sbar">
+              <span style="font-family: &quot;Sora&quot;, sans-serif">12:00</span>
+              <div class="sbar-right"><span>▪▪▪</span><span>🔋</span></div>
+            </div>
+            <div class="sbody">
+              <button class="back-btn" onclick="go('s-login')">← Back</button>
+              <div class="center-icon">🔐</div>
+              <div class="center-title">Forget Password?</div>
+              <div class="center-desc">Enter your email or phone number<br />to reset your password</div>
+              <div class="tab-pills">
+                <button class="tab-pill active" onclick="switchTab(this, 'email-f')">Email</button>
+                <button class="tab-pill" onclick="switchTab(this, 'phone-f')">Phone Number</button>
+              </div>
+              <div id="email-f" style="width: 100%">
+                <div class="fg"><label class="flabel">Email</label><input class="finput" type="email" placeholder="Enter your email" style="width: 100%" /></div>
+              </div>
+              <div id="phone-f" style="width: 100%; display: none">
+                <div class="fg">
+                  <label class="flabel">Phone Number</label>
+                  <div style="display: flex; gap: 8px">
+                    <span style="background: var(--input); border: 1.5px solid var(--border); border-radius: 11px; padding: 12px 10px; font-size: 0.72rem; color: var(--text); white-space: nowrap">+62 ▾</span>
+                    <input class="finput" type="tel" placeholder="8xx xxxx xxxx" style="flex: 1" />
+                  </div>
+                </div>
+              </div>
+              <button class="btn-p" onclick="go('s-reset')">Verify</button>
+            </div>
+          </div>
+
+          <!-- ⑤ RESET SUCCESS -->
+          <div class="screen" id="s-reset">
+            <div class="sbar">
+              <span style="font-family: &quot;Sora&quot;, sans-serif">12:00</span>
+              <div class="sbar-right"><span>▪▪▪</span><span>🔋</span></div>
+            </div>
+            <div class="sbody">
+              <div class="tick-circle">✓</div>
+              <div class="center-title">Congratulations</div>
+              <div class="center-desc">Your account password<br />has been successfully reset.</div>
+              <div style="width: 110px; height: 110px; background: var(--surface); border-radius: 24px; display: flex; align-items: center; justify-content: center; font-size: 3.2rem; border: 1px solid var(--border)">🎉</div>
+              <button class="btn-p" style="width: 100%; margin-top: 8px" onclick="go('s-login')">Let's Start</button>
+            </div>
+          </div>
+
+          <!-- ⑥ SIGN UP -->
+          <div class="screen" id="s-signup">
+            <div class="sbar">
+              <span style="font-family: &quot;Sora&quot;, sans-serif">12:00</span>
+              <div class="sbar-right"><span>▪▪▪</span><span>🔋</span></div>
+            </div>
+            <div class="sbody">
+              <button class="back-btn" onclick="go('s-welcome')">← Back</button>
+              <div class="screen-title">Sign Up</div>
+              <div class="fg"><label class="flabel">Full Name</label><input class="finput" type="text" placeholder="Enter your name" /></div>
+              <div class="fg"><label class="flabel">Email</label><input class="finput" type="email" placeholder="Enter your email" /></div>
+              <div class="fg"><label class="flabel">Phone Number</label><input class="finput" type="tel" placeholder="+62 xxx xxxx xxxx" /></div>
+              <div class="fg"><label class="flabel">Password</label><input class="finput" type="password" placeholder="Create password" /></div>
+              <div class="fg"><label class="flabel">Confirm Password</label><input class="finput" type="password" placeholder="Repeat password" /></div>
+              <button class="btn-p" style="margin-top: 6px" onclick="go('s-verify')">Sign Up</button>
+              <div class="divider">Or Continue With</div>
+              <div class="social-row">
+                <button class="sbtn" onclick="go('s-verify')">🇬 Google</button>
+                <button class="sbtn" onclick="go('s-verify')">f Facebook</button>
+              </div>
+              <div class="small-link">
+                Already have an account?
+                <a
+                  href="#"
+                  onclick="
+                    go('s-login');
+                    return false;
+                  "
+                  >Log In</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- ⑦ VERIFICATION -->
+          <div class="screen" id="s-verify">
+            <div class="sbar">
+              <span style="font-family: &quot;Sora&quot;, sans-serif">12:00</span>
+              <div class="sbar-right"><span>▪▪▪</span><span>🔋</span></div>
+            </div>
+            <div class="sbody">
+              <div class="center-icon" style="font-size: 1.8rem">🔒</div>
+              <div class="center-title">Phone Verification</div>
+              <div class="center-desc">Enter the 4-digit code sent to<br />your phone number</div>
+              <div class="otp-row">
+                <div class="otp-box">4</div>
+                <div class="otp-box">5</div>
+                <div class="otp-box">7</div>
+                <div class="otp-box">9</div>
+              </div>
+              <div style="font-size: 0.65rem; color: var(--muted)">Didn't receive code? <span style="color: var(--accent); cursor: pointer">Resend</span></div>
+              <div class="two-btns">
+                <button class="btn-ghost" onclick="go('s-signup')">← Back</button>
+                <button class="btn-p" style="flex: 1" onclick="go('s-congrats')">Verify</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- ⑧ CONGRATULATIONS -->
+          <div class="screen" id="s-congrats">
+            <div class="sbar">
+              <span style="font-family: &quot;Sora&quot;, sans-serif">12:00</span>
+              <div class="sbar-right"><span>▪▪▪</span><span>🔋</span></div>
+            </div>
+            <div class="sbody">
+              <div class="confetti-icon">🎊</div>
+              <div class="center-title" style="font-size: 1.2rem">Congratulations!</div>
+              <div class="center-desc">Your account has been created<br />successfully. Welcome aboard!</div>
+              <button class="btn-p" style="width: 100%; margin-top: 8px" onclick="go('s-home')">Let's Start →</button>
+            </div>
+          </div>
+
+          <!-- ⑨ HOME -->
+          <div class="screen" id="s-home">
+            <div class="sbar" style="background: linear-gradient(160deg, #1a1040, #0d1230); flex-shrink: 0">
+              <span style="font-family: &quot;Sora&quot;, sans-serif">12:00</span>
+              <div class="sbar-right"><span>▪▪▪</span><span>🔋</span></div>
+            </div>
+            <div class="home-topbar">
+              <button class="ham-btn" onclick="go('s-open')" title="Kembali ke Opening">
+                <span class="ham-line"></span>
+                <span class="ham-line"></span>
+                <span class="ham-line"></span>
+              </button>
+              <span class="home-title">Money Bag</span>
+              <button class="add-card-btn">+ Add Card</button>
+            </div>
+            <div class="sbody">
+              <!-- Credit Card -->
+              <div class="credit-card">
+                <div class="card-chip"></div>
+                <div class="card-num">1234 6587 6445 7980</div>
+                <div class="card-foot">
+                  <div>
+                    <div class="card-lbl">Card Holder</div>
+                    <div class="card-val">Mr. User</div>
+                  </div>
+                  <div>
+                    <div class="card-lbl">Expires</div>
+                    <div class="card-val">05/28</div>
+                  </div>
+                  <div class="card-logo">💳</div>
+                </div>
+              </div>
+
+              <!-- Balance -->
+              <div class="balance-row">
+                <div class="bal-card">
+                  <div class="bal-label">Total Balance</div>
+                  <div class="bal-amount">$1,200.00</div>
+                  <div class="bal-sub up">↑ 3.2% this month</div>
+                </div>
+                <div class="bal-card">
+                  <div class="bal-label">Total Spent</div>
+                  <div class="bal-amount">$350.00</div>
+                  <div class="bal-sub down">↓ By $50.00</div>
+                </div>
+              </div>
+
+              <!-- Tombol kembali ke Opening -->
+              <button class="home-back-btn" onclick="go('s-open')">← Kembali ke Opening Page</button>
+
+              <!-- Quick Actions -->
+              <div class="sec-header">
+                <span class="sec-title">Quick Actions</span>
+                <button class="see-all">See All</button>
+              </div>
+              <div class="quick-grid">
+                <div class="qa-item">
+                  <div class="qa-icon">📤</div>
+                  <div class="qa-label">Inbound</div>
+                </div>
+                <div class="qa-item">
+                  <div class="qa-icon">🔄</div>
+                  <div class="qa-label">Recharge</div>
+                </div>
+                <div class="qa-item">
+                  <div class="qa-icon">🏦</div>
+                  <div class="qa-label">Transfer</div>
+                </div>
+                <div class="qa-item">
+                  <div class="qa-icon">💝</div>
+                  <div class="qa-label">Donate</div>
+                </div>
+              </div>
+
+              <!-- Transactions -->
+              <div class="sec-header">
+                <span class="sec-title">Recent Transactions</span>
+                <button class="see-all">See All</button>
+              </div>
+              <div class="txns">
+                <div class="txn">
+                  <div class="txn-ico">🏪</div>
+                  <div class="txn-inf">
+                    <div class="txn-name">Gopek</div>
+                    <div class="txn-date">Today, 09:30 AM</div>
+                  </div>
+                  <div class="txn-amt down">-$24.00</div>
+                </div>
+                <div class="txn">
+                  <div class="txn-ico">💰</div>
+                  <div class="txn-inf">
+                    <div class="txn-name">Salary</div>
+                    <div class="txn-date">Yesterday, 10:00 AM</div>
+                  </div>
+                  <div class="txn-amt up">+$800.00</div>
+                </div>
+                <div class="txn">
+                  <div class="txn-ico">🛍️</div>
+                  <div class="txn-inf">
+                    <div class="txn-name">Shopping</div>
+                    <div class="txn-date">May 7, 14:22</div>
+                  </div>
+                  <div class="txn-amt down">-$65.00</div>
+                </div>
+                <div class="txn">
+                  <div class="txn-ico">⚡</div>
+                  <div class="txn-inf">
+                    <div class="txn-name">Electricity</div>
+                    <div class="txn-date">May 6, 08:00 AM</div>
+                  </div>
+                  <div class="txn-amt down">-$45.00</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Bottom Nav -->
+            <div class="bottom-nav">
+              <div class="nav-item active"><span class="ni">🏠</span>Home</div>
+              <div class="nav-item"><span class="ni">📊</span>Stats</div>
+              <div class="nav-center">＋</div>
+              <div class="nav-item"><span class="ni">💳</span>Cards</div>
+              <div class="nav-item" onclick="go('s-open')"><span class="ni">🚪</span>Keluar</div>
+            </div>
+          </div>
+        </div>
+        <!-- /phone-shell -->
+      </div>
+      <!-- /phone-wrap -->
+
+      <!-- SIDE PANEL -->
+      <div class="code-panel">
+        <div class="cp-title">⚡ Navigation Flow</div>
+        <div class="cp-label">All Screens</div>
+        <div class="flow-item current" id="fi-s-open" onclick="go('s-open')">
+          <div class="fi-dot"></div>
+          <div class="fi-name">① Opening Page</div>
+          <div class="fi-arrow">→</div>
+        </div>
+        <div class="flow-item" id="fi-s-welcome" onclick="go('s-welcome')">
+          <div class="fi-dot"></div>
+          <div class="fi-name">② Welcome Page</div>
+          <div class="fi-arrow">→</div>
+        </div>
+        <div class="flow-item" id="fi-s-login" onclick="go('s-login')">
+          <div class="fi-dot"></div>
+          <div class="fi-name">③ Log In Page</div>
+          <div class="fi-arrow">→</div>
+        </div>
+        <div class="flow-item" id="fi-s-forgot" onclick="go('s-forgot')">
+          <div class="fi-dot"></div>
+          <div class="fi-name">④ Forgot Password</div>
+          <div class="fi-arrow">→</div>
+        </div>
+        <div class="flow-item" id="fi-s-reset" onclick="go('s-reset')">
+          <div class="fi-dot"></div>
+          <div class="fi-name">⑤ Reset Success</div>
+          <div class="fi-arrow">→</div>
+        </div>
+        <div class="flow-item" id="fi-s-signup" onclick="go('s-signup')">
+          <div class="fi-dot"></div>
+          <div class="fi-name">⑥ Sign Up Page</div>
+          <div class="fi-arrow">→</div>
+        </div>
+        <div class="flow-item" id="fi-s-verify" onclick="go('s-verify')">
+          <div class="fi-dot"></div>
+          <div class="fi-name">⑦ Verification</div>
+          <div class="fi-arrow">→</div>
+        </div>
+        <div class="flow-item" id="fi-s-congrats" onclick="go('s-congrats')">
+          <div class="fi-dot"></div>
+          <div class="fi-name">⑧ Congratulations</div>
+          <div class="fi-arrow">→</div>
+        </div>
+        <div class="flow-item" id="fi-s-home" onclick="go('s-home')">
+          <div class="fi-dot"></div>
+          <div class="fi-name">⑨ Home Page</div>
+          <div class="fi-arrow">→</div>
+        </div>
+
+        <div class="cp-divider"></div>
+        <div class="cp-label">Button Navigation Code</div>
+        <div class="code-block" id="code-display"><span class="c-cm">// Opening Page</span> <span class="c-fn">go</span>(<span class="c-str">'s-welcome'</span>) <span class="c-cm">// → Welcome Page</span></div>
+
+        <div class="cp-divider"></div>
+        <div class="cp-label">Current Screen</div>
+        <div id="current-screen-info" style="background: var(--surface2); border-radius: 10px; padding: 12px; font-size: 0.68rem; color: var(--text); border: 1px solid var(--border)">
+          <span style="color: var(--accent2)">●</span> <strong>Opening Page</strong><br />
+          <span style="color: var(--muted); font-size: 0.6rem">Tap "Get Started" to proceed →</span>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const screenInfo = {
+        sopen: { name: "Opening Page", hint: 'Tap "Get Started" → Welcome Page' },
+        swelcome: { name: "Welcome Page", hint: "Sign Up → Sign Up | Log In → Login" },
+        slogin: { name: "Log In Page", hint: "Log In → Home | Forgot? → Forgot PW" },
+        sforgot: { name: "Forgot Password", hint: "Verify → Reset Success page" },
+        sreset: { name: "Reset Success", hint: '"Let\'s Start" → Back to Log In' },
+        ssignup: { name: "Sign Up Page", hint: "Sign Up → Phone Verification" },
+        sverify: { name: "Verification", hint: '"Verify" → Congratulations page' },
+        scongrats: { name: "Congratulations", hint: '"Let\'s Start" → Home Dashboard' },
+        shome: { name: "Home Page", hint: "☰ atau tombol merah → Opening Page" },
+      };
+      const codeMap = {
+        sopen: `<span class="c-cm">// Opening Page button</span>\n<span class="c-fn">go</span>(<span class="c-str">'s-welcome'</span>)`,
+        swelcome: `<span class="c-cm">// Sign Up button</span>\n<span class="c-fn">go</span>(<span class="c-str">'s-signup'</span>)\n\n<span class="c-cm">// Log In button</span>\n<span class="c-fn">go</span>(<span class="c-str">'s-login'</span>)`,
+        slogin: `<span class="c-cm">// Log In button</span>\n<span class="c-fn">go</span>(<span class="c-str">'s-home'</span>)\n\n<span class="c-cm">// Forgot Password</span>\n<span class="c-fn">go</span>(<span class="c-str">'s-forgot'</span>)\n\n<span class="c-cm">// Sign Up link</span>\n<span class="c-fn">go</span>(<span class="c-str">'s-signup'</span>)`,
+        sforgot: `<span class="c-cm">// Verify button</span>\n<span class="c-fn">go</span>(<span class="c-str">'s-reset'</span>)\n\n<span class="c-cm">// Back button</span>\n<span class="c-fn">go</span>(<span class="c-str">'s-login'</span>)`,
+        sreset: `<span class="c-cm">// Let's Start button</span>\n<span class="c-fn">go</span>(<span class="c-str">'s-login'</span>)`,
+        ssignup: `<span class="c-cm">// Sign Up button</span>\n<span class="c-fn">go</span>(<span class="c-str">'s-verify'</span>)\n\n<span class="c-cm">// Log In link</span>\n<span class="c-fn">go</span>(<span class="c-str">'s-login'</span>)`,
+        sverify: `<span class="c-cm">// Verify button</span>\n<span class="c-fn">go</span>(<span class="c-str">'s-congrats'</span>)\n\n<span class="c-cm">// Back button</span>\n<span class="c-fn">go</span>(<span class="c-str">'s-signup'</span>)`,
+        scongrats: `<span class="c-cm">// Let's Start button</span>\n<span class="c-fn">go</span>(<span class="c-str">'s-home'</span>)`,
+        shome: `<span class="c-cm">// ☰ Hamburger menu</span>\n<span class="c-fn">go</span>(<span class="c-str">'s-open'</span>)\n\n<span class="c-cm">// Tombol merah</span>\n<span class="c-fn">go</span>(<span class="c-str">'s-open'</span>)\n\n<span class="c-cm">// Nav Keluar</span>\n<span class="c-fn">go</span>(<span class="c-str">'s-open'</span>)`,
+      };
+
+      let current = "s-open";
+
+      function go(id) {
+        const old = document.getElementById(current);
+        const next = document.getElementById(id);
+        if (!next || id === current) return;
+        old.classList.add("exit");
+        setTimeout(() => {
+          old.classList.remove("active", "exit");
+        }, 280);
+        setTimeout(() => {
+          next.style.transform = "translateX(30px)";
+          next.style.opacity = "0";
+          next.classList.add("active");
+          requestAnimationFrame(() => {
+            next.style.transition = "opacity 0.32s ease, transform 0.32s ease";
+            next.style.transform = "translateX(0)";
+            next.style.opacity = "1";
+          });
+        }, 140);
+        current = id;
+        const key = id.replace("-", "");
+        const info = screenInfo[key] || {};
+        document.getElementById("current-screen-info").innerHTML = `<span style="color:var(--accent2);">●</span> <strong>${info.name || id}</strong><br>
+     <span style="color:var(--muted);font-size:0.6rem;">${info.hint || ""}</span>`;
+        document.getElementById("code-display").innerHTML = codeMap[key] || `<span class="c-fn">go</span>(<span class="c-str">'${id}'</span>)`;
+        document.querySelectorAll(".flow-item").forEach((el) => el.classList.remove("current"));
+        const fi = document.getElementById("fi-" + id);
+        if (fi) fi.classList.add("current");
+      }
+
+      function switchTab(btn, showId) {
+        document.querySelectorAll(".tab-pill").forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        document.getElementById("email-f").style.display = showId === "email-f" ? "block" : "none";
+        document.getElementById("phone-f").style.display = showId === "phone-f" ? "block" : "none";
+      }
+    </script>
+  </body>
+</html>

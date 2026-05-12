@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kaggle Learn - Platform Pembelajaran</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        background-color: #f8f9fa;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      /* Navbar */
+      .navbar {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 20px 0;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 40px;
+      }
+
+      .navbar-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .navbar h1 {
+        font-size: 28px;
+        font-weight: 700;
+      }
+
+      /* Tombol Kembali */
+      .btn-back-navbar {
+        text-decoration: none;
+        background: white;
+        color: #667eea;
+        padding: 10px 18px;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .btn-back-navbar:hover {
+        background: #f0f0f0;
+        transform: translateY(-2px);
+      }
+
+      /* Hero Section */
+      .hero {
+        text-align: center;
+        margin-bottom: 50px;
+        padding: 40px 20px;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      }
+
+      .hero h2 {
+        color: #667eea;
+        font-size: 36px;
+        margin-bottom: 15px;
+      }
+
+      .hero p {
+        font-size: 18px;
+        color: #666;
+      }
+
+      /* Courses Grid */
+      .courses-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 30px;
+        margin-bottom: 50px;
+      }
+
+      .course-card {
+        background: white;
+        border-radius: 10px;
+        padding: 40px 30px;
+        text-align: center;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
+      }
+
+      .course-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      }
+
+      .course-icon {
+        font-size: 60px;
+        margin-bottom: 20px;
+      }
+
+      .course-card h3 {
+        font-size: 24px;
+        color: #333;
+        margin-bottom: 15px;
+      }
+
+      .course-card p {
+        color: #666;
+        margin-bottom: 30px;
+        line-height: 1.8;
+      }
+
+      /* Buttons */
+      .btn {
+        display: inline-block;
+        padding: 12px 30px;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+      }
+
+      .btn-primary:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+      }
+
+      /* Info Section */
+      .info-section {
+        background: white;
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        margin-bottom: 40px;
+      }
+
+      .info-section h3 {
+        color: #667eea;
+        margin-bottom: 20px;
+        font-size: 22px;
+      }
+
+      .info-section p {
+        color: #666;
+        line-height: 1.8;
+      }
+
+      /* Footer */
+      footer {
+        background: #333;
+        color: white;
+        text-align: center;
+        padding: 20px;
+        margin-top: 60px;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .navbar-content {
+          flex-direction: column;
+          gap: 15px;
+        }
+
+        .courses-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .hero h2 {
+          font-size: 24px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Navbar -->
+    <div class="navbar">
+      <div class="container navbar-content">
+        <div class="logo">
+          <h1>📊 Kaggle Learn</h1>
+        </div>
+
+        <!-- Tombol Kembali -->
+        <a href="../index.html#projects" class="btn-back-navbar"> ⬅ Kembali </a>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+      <!-- Hero -->
+      <div class="hero">
+        <h2>Selamat Datang di Kaggle Learn</h2>
+
+        <p>Platform pembelajaran gratis untuk data science dan machine learning. Pilih materi yang ingin dipelajari:</p>
+      </div>
+
+      <!-- Courses -->
+      <div class="courses-grid">
+        <!-- Python -->
+        <div class="course-card">
+          <div class="course-icon">🐍</div>
+
+          <h3>Python</h3>
+
+          <p>Pelajari dasar-dasar pemrograman Python untuk data science dengan tutorial interaktif dan praktik langsung.</p>
+
+          <a href="python.html" class="btn btn-primary"> Mulai Belajar Python </a>
+        </div>
+
+        <!-- SQL -->
+        <div class="course-card">
+          <div class="course-icon">🗄️</div>
+
+          <h3>Intro To SQL</h3>
+
+          <p>Pelajari SQL dari awal untuk query dan analisis data dari database relasional dengan mudah.</p>
+
+          <a href="sql.html" class="btn btn-primary"> Mulai Belajar SQL </a>
+        </div>
+      </div>
+
+      <!-- Info -->
+      <div class="info-section">
+        <h3>Tentang Kaggle Learn</h3>
+
+        <p>
+          Kaggle Learn menyediakan kursus gratis yang dirancang untuk mengajarkan keterampilan data science dan machine learning. Setiap kursus terdiri dari beberapa modul yang dapat diselesaikan dalam waktu singkat. Belajar dengan
+          kecepatan Anda sendiri dan dapatkan sertifikat setelah menyelesaikan setiap kursus.
+        </p>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <p>&copy; 2024 Kaggle Learn Platform. Sumber: www.kaggle.com/learn</p>
+    </footer>
+  </body>
+</html>
